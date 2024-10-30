@@ -1,0 +1,179 @@
+
+/* 기본 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body 스타일 */
+body {
+    background-color: #e0f7fa;
+    color: #333;
+}
+
+/* Header 스타일 */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #e3f2fd;
+    border-bottom: 1px solid #ddd;
+}
+
+#logo {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.header-icons span {
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+/* Main Content 스타일 */
+main {
+    padding: 20px;
+}
+
+.content {
+    display: flex;
+    gap: 2.5%; /* 카드 사이의 간격 */
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.content-card {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 22vw;
+    height: 30vw;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    text-decoration: none; /* 언더라인 제거 */
+    color: inherit; /* 텍스트 색상 상속 */
+}
+
+.card-text {
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    width: 100%; /* 텍스트가 카드 너비에 맞춰 중앙 정렬되도록 */
+    text-align: left;
+    font-size: 2.0vw; /* 화면 크기에 따라 반응형으로 조정 */
+}
+.lists {
+    display: flex;
+    gap: 15px;
+}
+
+.list-item {
+    background-color: #f5f5f5;
+    padding: 20px;
+    flex: 1;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.modal-content {
+    max-width: 300px; /* 모달 창의 최대 너비 설정 */
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.modal-content h2 {
+    font-size: 20px;
+    color: #d36d6d;
+    margin-bottom: 20px;
+}
+
+.modal-content input[type="text"],
+        .modal-content input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .modal-content .gender-check {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            margin: 8px 0;
+        }
+        .modal-content .email-container {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .modal-content select {
+            flex: 0.5; /* 셀렉트 박스의 크기 조정 */
+            padding: 8px;
+        }
+        .modal-content .register-btn {
+            padding: 10px;
+            width: 100%;
+            background-color: #dcdcdc;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .modal-content .google-btn {
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+            display: block;
+        }
+        .modal-content .register-link {
+            margin-top: 5px;
+            cursor: pointer;
+            text-decoration: underline;
+            color: #666;
+        }
+        .modal-content .register-link:hover {
+            cursor: pointer; /* 커서 변경 */
+            color: #333; /* 색상 변경으로 시각적 효과 추가 */
+        }
+        .close-btn {
+            background-color: #ccc;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }

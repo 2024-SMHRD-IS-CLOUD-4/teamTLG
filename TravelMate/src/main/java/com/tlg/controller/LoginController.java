@@ -42,7 +42,7 @@ public class LoginController extends HttpServlet {
 			// 세션에다가 회원 정보를 저장하고, index.jsp로 사용자를 보내주기!
 			HttpSession session = request.getSession();
 			session.setAttribute("member", result);
-			response.sendRedirect("mainPage.html");
+			response.sendRedirect("index.html");
 		}
 		
 		
