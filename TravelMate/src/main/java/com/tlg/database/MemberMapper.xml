@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberMapper">
 	<insert id="insert" parameterType="com.tlg.model.TmMember">
-		insert into user_info (id, pw, nick, gender, email, name) values (#{id}, #{pw}, #{nick}, #{gender}, #{email}, #{name})
+		insert into user_info (id, pw, name, nick, gender, email) values (#{id}, #{pw}, #{name}, #{nick}, #{gender}, #{email})
 	</insert>
 	<select id="login" parameterType="com.tlg.model.TmMember" resultType="com.tlg.model.TmMember">
 		select * from user_info where id = #{id} and pw = #{pw}

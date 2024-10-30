@@ -32,9 +32,9 @@ public class JoinController extends HttpServlet {
 		int result = dao.join(joinMember);
 		
 		if(result > 0) {
-			response.sendRedirect("login.html");
+			response.sendRedirect("index.html");
 		} else {
-			response.sendRedirect("join.jsp");
+			response.sendRedirect("index.html");
 		}
 		
 	}

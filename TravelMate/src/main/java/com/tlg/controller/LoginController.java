@@ -21,24 +21,24 @@ public class LoginController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-				
+		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
-			
+		
 		TmMember loginMember = new TmMember(id, pw);
 		
 		MemberDAO dao = new MemberDAO();
 		
 		TmMember result = dao.login(loginMember);
-				
+		
 		if(result == null) {
-			response.sendRedirect("login.html");
+			response.sendRedirect("index.html");
 		}else {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", result);
 			response.sendRedirect("index.html");
 		}
-			
+		
 	}
 
 }

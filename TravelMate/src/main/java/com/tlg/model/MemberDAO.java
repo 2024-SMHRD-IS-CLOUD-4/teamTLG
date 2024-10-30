@@ -1,12 +1,7 @@
 package com.tlg.model;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-
-import com.tlg.model.TmMember;
-import com.tlg.database.SqlSessionManager;
 
 public class MemberDAO {
 
@@ -25,6 +20,4 @@ public class MemberDAO {
 		session.close();
 		return result;
 	}
-
-	
 }
