@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Mate</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
@@ -46,9 +46,11 @@
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal('loginModal')">X</button>
             <div class="logo-placeholder">로고</div>
-            <input type="text" placeholder="아이디를 입력해주세요.">
-            <input type="password" placeholder="비밀번호를 입력해주세요.">
-            <button class="login-btn">로그인</button>
+            <form action="LoginController" method="post">
+            <input type="text" name="id" placeholder="아이디를 입력해주세요.">
+            <input type="password" name="pw" placeholder="비밀번호를 입력해주세요.">
+            <input type="submit" value="로그인" >
+            </form>
             <a href="#" class="google-btn">google로 로그인하기</a>
             <span class="register-link" onclick="openModal('registerModal')">회원가입 하기</span>
         </div>
@@ -58,30 +60,27 @@
     <div id="registerModal" class="modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal('registerModal')">X</button>
+            <form action="JoinController" method="post">
             <h2>Travel Mate 회원가입</h2>
-            <input type="text" placeholder="아이디를 입력해주세요.">
-            <input type="password" placeholder="비밀번호를 입력해주세요.">
-            <input type="text" placeholder="이름을 입력해주세요.">
+            <input type="text" name="id" placeholder="아이디를 입력해주세요.">
+            <input type="password" name="pw" placeholder="비밀번호를 입력해주세요.">
+            <input type="text" name="name" placeholder="이름을 입력해주세요.">
+            <input type="text" name="nick" placeholder="닉네임을 입력해주세요.">
             <div class="gender-check">
                 <span>성별 체크</span>
-                <input type="radio" name="gender" value="male"> 남
-                <input type="radio" name="gender" value="female"> 여
+                <input type="radio" name="gender" value="M"> 남
+                <input type="radio" name="gender" value="F"> 여
             </div>
             <div class="email-container">
-                <input type="text" placeholder="이메일을 입력해주세요.">
-                @
-                <select>
-                    <option>직접입력</option>
-                    <option>gmail.com</option>
-                    <option>naver.com</option>
-                    <option>daum.net</option>
-                </select>
+                <input type="text" name="email" placeholder="이메일을 입력해주세요.">
+                
             </div>
-            <button class="register-btn" onclick="completeRegistration()">회원가입</button>
+            <input type="submit" value="회원가입">
+            </form>
         </div>
     </div>
 
     <!-- JavaScript 파일 연결 -->
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
