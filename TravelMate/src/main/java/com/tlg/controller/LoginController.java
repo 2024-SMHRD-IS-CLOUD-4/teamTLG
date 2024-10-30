@@ -36,7 +36,7 @@ public class LoginController extends HttpServlet {
 		}else {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", result);
-			response.sendRedirect("mainPage.html");
+			response.sendRedirect("index.html");
 		}
 			
 	}

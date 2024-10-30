@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Mate</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1 id="logo" onclick="goToMain()">Travel Mate</h1>
+        <div class="header-icons">
+            <span onclick="openModal('alarmModal')">알람</span>
+            <span onclick="checkLoginStatus()">my page</span>
+            <span onclick="openModal('travelBagModal')">나만의 여행가방</span>
+        </div>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main>
+        <div class="content">
+            <a href="#" class="content-card" style="background-image: url('./img/tokyoView.jpg');">
+                <p class="card-text">도쿄 여행 꿀팁</p>
+            </a>
+            <a href="#" class="content-card" style="background-image: url('./img/tako.jpg');">
+                <p class="card-text">도쿄 맛집 list</p>
+            </a>
+            <a href="#" class="content-card" style="background-image: url('./img/course.jpg');">
+                <p class="card-text">추천 여행코스</p>
+            </a>
+            <a href="#" class="content-card" style="background-image: url('./img/bestReview.jpg');">
+                <p class="card-text">Best Review</p>
+            </a>
+        </div>
+        <div class="lists">
+            <div class="list-item">최근 리뷰 게시글</div>
+            <div class="list-item">나의 여행 계획 List</div>
+        </div>
+    </main>
+
+    <!-- 로그인 모달 -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('loginModal')">X</button>
+            <div class="logo-placeholder">로고</div>
+            <input type="text" placeholder="아이디를 입력해주세요.">
+            <input type="password" placeholder="비밀번호를 입력해주세요.">
+            <button class="login-btn">로그인</button>
+            <a href="#" class="google-btn">google로 로그인하기</a>
+            <span class="register-link" onclick="openModal('registerModal')">회원가입 하기</span>
+        </div>
+    </div>
+
+    <!-- 회원가입 모달 -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('registerModal')">X</button>
+            <h2>Travel Mate 회원가입</h2>
+            <input type="text" placeholder="아이디를 입력해주세요.">
+            <input type="password" placeholder="비밀번호를 입력해주세요.">
+            <input type="text" placeholder="이름을 입력해주세요.">
+            <div class="gender-check">
+                <span>성별 체크</span>
+                <input type="radio" name="gender" value="male"> 남
+                <input type="radio" name="gender" value="female"> 여
+            </div>
+            <div class="email-container">
+                <input type="text" placeholder="이메일을 입력해주세요.">
+                @
+                <select>
+                    <option>직접입력</option>
+                    <option>gmail.com</option>
+                    <option>naver.com</option>
+                    <option>daum.net</option>
+                </select>
+            </div>
+            <button class="register-btn" onclick="completeRegistration()">회원가입</button>
+        </div>
+    </div>
+
+    <!-- JavaScript 파일 연결 -->
+    <script src="script.js"></script>
+</body>
+</html>
