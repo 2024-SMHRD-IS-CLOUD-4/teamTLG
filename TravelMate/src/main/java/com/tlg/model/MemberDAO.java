@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.tlg.model.TmMember;
 import com.tlg.database.SqlSessionManager;
 
 public class MemberDAO {
@@ -17,5 +18,13 @@ public class MemberDAO {
 		sqlSession.close();
 		return result;
 	}
+	
+	public TmMember login(TmMember loginMember) {
+		SqlSession session = factory.openSession(true);
+		TmMember result = session.selectOne("MemberMapper.login", loginMember);
+		session.close();
+		return result;
+	}
+
 	
 }

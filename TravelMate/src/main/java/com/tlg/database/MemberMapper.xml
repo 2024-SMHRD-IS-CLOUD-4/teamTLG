@@ -4,4 +4,9 @@
 	<insert id="insert" parameterType="com.tlg.model.TmMember">
 		insert into user_info (id, pw, nick, gender, email, name) values (#{id}, #{pw}, #{nick}, #{gender}, #{email}, #{name})
 	</insert>
+	
+	<select id="login" parameterType="com.tlg.model.TmMember"
+						resultType="com.tlg.model.TmMember">
+		select * from user_info where id = #{id} and pw = #{pw}
+	</select>
 </mapper>
