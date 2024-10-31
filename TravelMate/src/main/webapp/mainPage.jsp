@@ -9,10 +9,10 @@
     <title>Travel Mate</title>
     <link rel="stylesheet" href="assets/css/mainStyle.css">
 </head>
-	<%
-		// 세션 영역 안에 있는 사용자의 id를 가져오기!
-		TmMember member = (TmMember)session.getAttribute("member");
-	%>
+   <%
+      // 세션 영역 안에 있는 사용자의 id를 가져오기!
+      TmMember member = (TmMember)session.getAttribute("member");
+   %>
 <body>
 
     <!-- Header -->
