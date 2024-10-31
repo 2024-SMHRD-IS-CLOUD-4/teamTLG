@@ -19,8 +19,6 @@ function login() {
 	}
 }
 
-document.getElementById("login").addEventListener('click', login);
-
 // 회원가입 함수
 function signup() {
     // 회원가입 로직 구현 가능 (예: ID/PW 저장)
