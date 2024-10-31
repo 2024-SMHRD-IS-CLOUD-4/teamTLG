@@ -13,6 +13,8 @@ body {
     color: #333;
 }
 
+a { text-decoration:none }
+
 /* Header 스타일 */
 header {
     display: flex;

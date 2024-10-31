@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Mate Review</title>
+    <link rel="stylesheet" href="assets/css/reviewListStyle.css">
+</head>
+<body>
+    <header>
+        <h1>Travel Mate</h1>
+    </header>
+    
+    <nav>
+        <ul>
+        	<li><a href="index.jsp">Home</a></li>
+            <li><a href="notice.html">Notice</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="reviewList.html" class="active">Review</a></li> <!-- 활성화된 메뉴 -->
+            <li><a href="info_tokyo.html">Info.Tokyo</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="announcement">
+            <p>*최근공지사항*</p>
+            <p>💢이거언제다하니...?</p>
+
+        </section>
+        
+        <section class="best-reviews">
+            <div class="review-card-container">
+                <div class="review-card-title">best 공감 리뷰</div>
+                <div class="review-card" style="background-image: url('img/bestReview.png');">
+                    <p>P들의 4박5일 일본여행기</p>
+                </div>
+            </div>
+            <div class="review-card-container">
+                <div class="review-card-title">댓글이 가장많은 리뷰</div>
+                <div class="review-card" style="background-image: url('img/여친.jpg');">
+                    <p>여자친구랑 일주일간 여행</p>
+                </div>
+            </div>
+            <div class="review-card-container">
+                <div class="review-card-title">best 조회수 리뷰</div>
+                <div class="review-card" style="background-image: url('img/이승기.jpg');">
+                    <p>군대가기 전 마지막 여행..</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="recent-posts">
+            <h2>여행 게시글</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>제목</th>
+                        <th>글쓴이</th>
+                        <th>작성시간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>3</td>
+                        <td><span>👍</span> 재미있는 도쿄 여행기</td>
+                        <td>도쿄lover</td>
+                        <td>2024.10.30</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>도쿄 찐맛집 발견!!</td>
+                        <td>여행v10</td>
+                        <td>2024.10.29</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>즐겁다! 친구들과 4박5일 도...</td>
+                        <td>dlswmd__</td>
+                        <td>2024.10.27</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button onclick="createPost()">게시글 작성하기</button>
+        </section>
+    </main>
+
+    <footer>
+        <input type="text" placeholder="search">
+        <button>🔍</button>
+    </footer>
+
+    <script src="assets/js/reviewListScript.js"></script>
+</body>
+</html>

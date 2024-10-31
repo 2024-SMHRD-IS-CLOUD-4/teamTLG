@@ -14,10 +14,12 @@ function checkLoginStatus() {
 // 로그인 함수
 function login() {
     // 로그인 로직 구현 가능 (예: ID/PW 확인)
-    isLoggedIn = true; // 로그인 성공 시 로그인 상태 변경
-    closeModal('loginModal');
-    alert("로그인 성공!");
+	if(isLoggedIn = true) {
+		alert("로그인 성공!");
+	}
 }
+
+document.getElementById("login").addEventListener('click', login);
 
 // 회원가입 함수
 function signup() {
@@ -34,4 +36,9 @@ function openModal(modalId) {
 // 모달 닫기
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = 'none';
+}
+
+// 메인으로 이동
+function goToMain() {
+	location.href="index.jsp"
 }

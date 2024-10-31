@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info.Tokyo</title>
+    <link rel="stylesheet" href="assets/css/infoTokyo.css">
+</head>
+<body>
+    <body>
+        <header>
+            <h1>Travel Mate</h1>
+        </header>
+        
+        <nav>
+            <ul>
+            	<li><a href="index.jsp">Home</a></li>
+                <li><a href="#">Notice</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="reviewList.html">Review</a></li>
+                <li><a href="info_tokyo.html" class="active">Info.Tokyo</a></li> <!-- 활성화된 메뉴 -->
+            </ul>
+        </nav>
+    <main>
+        <section class="info-cards">
+            <div class="info-card" style="background-image: url('img/어머나.png');">
+                <div class="info-card-text">
+                    <h2>JAPAN</h2>
+                    <p>일본 여행 주의사항</p>
+                </div>
+            </div>
+            <div class="info-card" style="background-image: url('img/숙소.png');">
+                <div class="info-card-text">
+                    <h2>숙소 TOP10</h2>
+                </div>
+            </div>
+            <div class="info-card" style="background-image: url('img/cafe.jpg');">
+                <div class="info-card-text">
+                    <h2>카페 TOP10</h2>
+                </div>
+            </div>
+            <div class="info-card" style="background-image: url('img/관광.jpg');">
+                <div class="info-card-text">
+                    <h2>관광지 TOP10</h2>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <form onsubmit="openGoogleSearch(event)">
+            <input type="text" id="google-search-input" placeholder="google search">
+            <button type="submit">🔍</button>
+        </form>
+    </footer>
+    <script src="assets/js/infoTokyo.js"></script>
+</body>
+</html>

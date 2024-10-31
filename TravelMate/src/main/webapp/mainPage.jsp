@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Mate</title>
-    <link rel="stylesheet" href="assets/css/TravelBoardStyle.css">
+    <link rel="stylesheet" href="assets/css/mainStyle.css">
 </head>
 	<%
 		// 세션 영역 안에 있는 사용자의 id를 가져오기!
@@ -17,7 +17,7 @@
 
     <!-- Header -->
     <header>
-        <h1 id="logo" onclick="goToMain()">Travel Mate</h1>
+       <h1 id="logo" onclick="goToMain()">Travel Mate</h1>
         <div class="header-icons">
             <span onclick="openModal('alarmModal')">알람</span>
             <%if(member == null) {%>
@@ -33,17 +33,17 @@
     <!-- 메인 컨텐츠 -->
     <main>
         <div class="content">
-            <a href="#" class="content-card" style="background-image: url('./img/tokyoView.jpg');">
+            <a href="#" class="content-card" style="background-image: url('img/tokyoView.jpg');">
                 <p class="card-text">도쿄 여행 꿀팁</p>
             </a>
-            <a href="#" class="content-card" style="background-image: url('./img/tako.jpg');">
+            <a href="#" class="content-card" style="background-image: url('img/tako.png');">
                 <p class="card-text">도쿄 맛집 list</p>
             </a>
-            <a href="#" class="content-card" style="background-image: url('./img/course.jpg');">
+            <a href="#" class="content-card" style="background-image: url('img/course.jpg');">
                 <p class="card-text">추천 여행코스</p>
             </a>
-            <a href="http://localhost:8081/asdasdasd/TravelBoard.jsp" class="content-card" style="background-image: url('./img/bestReview.jpg');">
-                <p class="card-text">Best Review</p>
+            <a href="reviewList.html" class="content-card" style="background-image: url('img/bestReview.png');">
+                <p class="card-text">여행 게시판</p>
             </a>
         </div>
         <div class="lists">
@@ -59,8 +59,8 @@
             <div class="logo-placeholder">로고</div>
             <form action="LoginController" method="post">
             <input type="text" name="id" placeholder="아이디를 입력해주세요.">
-            <input type="password" name="pw" placeholder="비밀번호를 입력해주세요.">
-            <input type="submit" value="로그인" >
+            <input type="text" name="pw" placeholder="비밀번호를 입력해주세요.">
+            <button>로그인</button>
             </form>
             <a href="#" class="google-btn">google로 로그인하기</a>
             <span class="register-link" onclick="openModal('registerModal')">회원가입 하기</span>
@@ -83,16 +83,15 @@
                 <input type="radio" name="gender" value="F"> 여
             </div>
             <div class="email-container">
-                <input type="text" name="email" placeholder="이메일을 입력해주세요.">
-                
+                <input type="text" name="email" placeholder="이메일을 입력해주세요.">            
             </div>
-            <input type="submit" value="회원가입">
+            <button type="submit">회원가입</button>
             </form>
         </div>
     </div>
 
     <!-- JavaScript 파일 연결 -->
-    <script src="assets/js/MainScript.js"></script>
+    <script src="assets/js/mainScript.js"></script>
 </body>
 </html>
     
