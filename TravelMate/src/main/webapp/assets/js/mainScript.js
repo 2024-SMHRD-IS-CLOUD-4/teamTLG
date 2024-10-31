@@ -40,5 +40,5 @@ function closeModal(modalId) {
 
 // 메인으로 이동
 function goToMain() {
-	location.href="index.jsp"
+	location.href="mainPage.jsp"
 }
