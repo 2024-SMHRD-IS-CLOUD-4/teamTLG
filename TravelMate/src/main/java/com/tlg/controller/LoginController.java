@@ -32,11 +32,11 @@ public class LoginController extends HttpServlet {
 		TmMember result = dao.login(loginMember);
 		
 		if(result == null) {
-			response.sendRedirect("index.html");
+			response.sendRedirect("mainPage.jsp");
 		}else {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", result);
-			response.sendRedirect("index.html");
+			response.sendRedirect("mainPage.jsp");
 		}
 		
 	}
