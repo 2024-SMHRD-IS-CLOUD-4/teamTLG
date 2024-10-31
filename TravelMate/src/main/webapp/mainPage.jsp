@@ -33,7 +33,7 @@
     <!-- 메인 컨텐츠 -->
     <main>
         <div class="content">
-            <a href="#" class="content-card" style="background-image: url('img/tokyoView.jpg');">
+            <a href="#" class="content-card" style="background-image: url('img/tokyoView.png');">
                 <p class="card-text">도쿄 여행 꿀팁</p>
             </a>
             <a href="#" class="content-card" style="background-image: url('img/tako.png');">
