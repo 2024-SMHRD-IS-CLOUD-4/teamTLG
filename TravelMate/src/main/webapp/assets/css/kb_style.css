@@ -1,0 +1,375 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f6f9;
+}
+
+.kanban-board {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 20px; /* 칸반보드와 댓글 섹션 사이의 간격 */
+}
+
+.kanban-column {
+    background-color: #fff;
+    width: 250px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.kanban-column h2 {
+    text-align: center;
+    color: #333;
+}
+
+.kanban-items {
+    min-height: 300px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fafafa;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.kanban-card {
+    background-color: #ffffff;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: anywhere;
+}
+
+.card-input {
+    width: 100%;
+    border: none;
+    resize: none;
+    overflow: hidden;
+    font-family: inherit;
+    font-size: inherit;
+    background: transparent;
+    white-space: pre-wrap;
+    word-break: break-word;
+    min-height: 40px;
+}
+
+button {
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-button { 
+    width: 50px; /* 원하는 너비 */
+    /* background-color: transparent; */
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto; /* 오른쪽 끝으로 정렬 */
+}
+
+button:hover {
+    background-color: #acc4dc;
+}
+
+.like-button {
+    width: 50px; /* 원하는 너비 */
+    background-color: transparent;
+    border: none;
+    color: #ff5e5e; /* 하트 색상 */
+    cursor: pointer;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto; /* 오른쪽 끝으로 정렬 */
+    /* padding: 0; */
+}
+
+.like-button span {
+    margin-left: 5px; /* 하트와 숫자 사이의 간격 */
+}
+
+.kanban-container {
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+
+.add-day-button {
+    font-size: 48px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #999;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 200px; /* 마지막 컬럼의 중앙부와 맞추기 위한 위치 조정 */
+    margin-left: 30px;
+}
+
+.add-day-button:hover {
+    background-color: #e6e6e6;
+    color: #666;
+}
+
+/* 댓글 섹션 스타일 */
+/* #comments{
+	margin : 0;
+	padding: 0;
+}
+
+ul,li {
+	list-style : none;
+}
+
+.comment > li{
+	margin-top : 20px;
+}
+
+.commnet > li:nth-child(1){
+	margin:0px;
+}
+
+.comment-row{
+	display:flex;
+	justify-content:space-between;
+	flex-direction:row;
+}
+
+.comment-row{
+	margin-top: 20px;
+	width : 100%;
+}
+
+.comment-row > li:nth-child(2){
+	flex-shrink: 0;
+	flex-grow : 1;
+	padding-left : 25px;
+	z-index : 1;
+	width : 100%;
+}
+
+.comment-row li:nth-child(2){
+	width : 85px;
+}
+
+.comment-form > form{
+	display : flex;
+	flex-direction : row;
+	flex-wrap: wrap;
+	justify-content : space-between;
+}
+
+.comment-form > form >h4{
+	width : 100%;
+	margin : 14px 0 14px 0;
+}
+
+.comment-content{
+	cursor : pointer;
+	word-break : break-all;
+	padding-right : 25px;
+}
+
+.ps_box{
+	display : block;
+	position : relative;
+	width: 80%;
+	height : 51px;
+	border : solid 1px #dadada;
+	padding : 10px 14px 10px 14px;
+	background : #fff;
+	box-sizing : border-box;
+}
+
+.ps_box > input {
+	outline:none;
+}
+
+.int {
+	display : block;
+	position : relatie;
+	width : 100%;
+	height : 29px;
+	padding-right : 25px;
+	line-height : 29px;
+	border : none;
+	background : #fff;
+	font-size : 15px;
+	box-sizing : border-box;
+	z-index : 10;
+}
+
+.comment_btn{
+	width : 18px;
+	padding : 18px 0 16px;
+	text-align : center;
+	box-sizing : border-box;
+	text-decoration : none;
+	border : none;
+	background: #333;
+	color : #fff;
+	font-size : 14px;
+}
+
+.comment-delete-btn{
+	display : inline-block;
+	margin-left : 7px;
+	cursor : pointer;
+}
+
+.comment-update-input{
+	border:none;
+	border-bottom: 1px solid #333;
+	font-size : 16px;
+	color : #666;
+	outline : none;
+} */
+
+
+#comment-section {
+    width: 100%;
+    max-width: 1200px; /* 댓글 섹션의 너비를 칸반보드에 맞춤 */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.comment {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    max-width: 800px;
+    width: 100%;
+    word-break: break-word;
+}
+
+.comment-text {
+    flex: 1; /* 텍스트가 가능한 공간을 차지하도록 */
+    margin-right: 10px; /* 좋아요 버튼과의 간격 */
+    word-break: break-word;
+    display: inline-block;
+}
+
+#comments {
+    margin-bottom: 15px;
+}
+
+#comment-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#comment-content {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    resize: vertical;
+}
+
+#add-comment {
+    align-self: flex-end;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#add-comment:hover {
+    background-color: #0056b3;
+}
+
+.like-button {
+    background-color: transparent;
+    border: none;
+    color: #ff5e5e; /* 하트 색상 */
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.like-button:hover {
+    color: #ff4c4c;
+}
+
+.like-button:disabled {
+    cursor: default;
+    color: #ccc;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 15px;
+}
+
+.pagination button {
+    background-color: transparent;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.pagination button.active-page {
+    font-weight: bold;
+    color: #007bff;
+    background-color: #e6f0ff;
+}
+
+.pagination button:hover {
+    color: #0056b3;
+    background-color: #f0f8ff;
+}
