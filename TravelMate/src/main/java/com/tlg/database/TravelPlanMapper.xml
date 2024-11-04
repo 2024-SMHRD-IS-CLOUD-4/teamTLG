@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tlg.database.TravelPlanMapper">
+    <!-- 여행 계획 정보 삽입 -->
+    <insert id="insertPlan" parameterType="com.tlg.model.TravelPlan">
+        INSERT INTO TRAVEL_PLAN_INFO (id, tr_title, tr_st_dt, tr_ed_dt, tr_desc)
+        VALUES (#{id}, #{tr_title}, #{tr_st_dt}, #{tr_ed_dt}, #{tr_desc})
+    </insert>
+
+    <!-- 여행 계획 정보 조회 -->
+    <select id="selectPlan" parameterType="String" resultType="com.tlg.model.TravelPlan">
+        SELECT * FROM TRAVEL_PLAN_INFO WHERE plan_id = #{planId}
+    </select>
+    
+    <!-- 댓글입력 -->
+    <insert id="PlanComment_input" parameterType = "com.tlg.model.Comment">
+    	INSERT INTO COMMENT_INFO (c_idx, cmt_content, created_at, cmt_heart, id, tr_idx)
+    	VALUES (#{c_idx}, #{cmt_content}, #{created_at}, #{cmt_heart}, #{id}, #{tr_idx})
+    </insert>
+    
+    <!-- 댓글출력 -->
+    <select id="PlanComment_output" parameterType="com.tlg.model.Comment" resultType="com.tlg.model.Comment">
+    	SELECT * FROM COMMENT_INFO WHERE c_idx = #{c_idx} and tr_idx = #{tr_idx}
+    </select>
+</mapper>
