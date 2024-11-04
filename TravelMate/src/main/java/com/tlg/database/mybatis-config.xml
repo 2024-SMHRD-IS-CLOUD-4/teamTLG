@@ -19,5 +19,6 @@
     <mapper resource="com/tlg/database/MemberMapper.xml"/>
     <mapper resource= "com/tlg/database/ScheduleMapper.xml"/>
     <mapper resource= "com/tlg/database/TravelPlanMapper.xml"/>
+    <mapper resource="com/tlg/database/BoardMapper.xml"/>
   </mappers>
 </configuration>
