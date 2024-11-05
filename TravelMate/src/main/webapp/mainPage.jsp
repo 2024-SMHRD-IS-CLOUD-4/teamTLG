@@ -42,7 +42,7 @@
             <a href="#" class="content-card" style="background-image: url('img/course.jpg');">
                 <p class="card-text">추천 여행코스</p>
             </a>
-            <a href="reviewList.html" class="content-card" style="background-image: url('img/bestReview.png');">
+            <a href="reviewList.jsp" class="content-card" style="background-image: url('img/bestReview.png');">
                 <p class="card-text">여행 게시판</p>
             </a>
         </div>
