@@ -8,4 +8,7 @@
 	<select id="getBoard" resultType="com.tlg.model.TmBoard">
 		select * from community_info order by c_idx desc
 	</select>
+	<select id="getBoardOne" parameterType="int" resultType="com.tlg.model.TmBoard">
+		select * from community_info where c_idx = #{c_idx}
+	</select>
 </mapper>

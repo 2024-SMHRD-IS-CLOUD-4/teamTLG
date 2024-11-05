@@ -26,4 +26,10 @@ public class BoardDAO {
 		return result;
 	}
 	
+	public TmBoard getBoardOne(int c_idx) {
+		SqlSession session = factory.openSession(true);
+		TmBoard result = session.selectOne("BoardMapper.getBoardOne", c_idx);
+		session.close();
+		return result;
+	}
 }

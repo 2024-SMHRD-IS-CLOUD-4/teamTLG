@@ -20,4 +20,18 @@ public class MemberDAO {
 		session.close();
 		return result;
 	}
+
+	public int update(TmMember updateMember) {
+		SqlSession sqlSession = factory.openSession(true);
+		int result = sqlSession.update("MemberMapper.update", updateMember);
+		sqlSession.close();
+		return result;
+	}
+	
+	public int delete(String pw) {
+		SqlSession sqlSession = factory.openSession(true);
+		int result = sqlSession.delete("MemberMapper.delete", pw);
+		sqlSession.close();
+		return result;
+	}
 }

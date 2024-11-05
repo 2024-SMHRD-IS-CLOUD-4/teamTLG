@@ -1,0 +1,130 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+}
+
+header h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #b08584;
+}
+
+.profile-section {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.profile-image-label {
+    cursor: pointer;
+}
+
+.profile-section img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #b08584;
+}
+
+.edit-info-button {
+    margin-top: 10px;
+    padding: 5px 15px;
+    background-color: #b08584;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.travel-plan-list {
+    width: 70%;
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.list-buttons button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #b08584;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.travel-plan-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.travel-plan-list th {
+    padding: 10px;
+    background-color: #f1f1f1;
+    text-align: left;
+}
+
+/* 모달 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px 20px; /* 패딩 조정 */
+    width: 320px; /* 모달 크기 조정 */
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* 패딩 포함해 정렬 */
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    width: 48%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-buttons button:first-child {
+    background-color: #b08584;
+    color: white;
+}
+
+.modal-buttons button:last-child {
+    background-color: #f1f1f1;
+    color: #333;
+}

@@ -23,27 +23,20 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
 %>
 
 <body>
-
-	<!-- Header -->
-	<header>
-		<h1 id="logo" onclick="goToMain()">Travel Mate</h1>
-		<div class="header-icons">
-			<span onclick="openModal('alarmModal')">알람</span>
-			<%
-			if (member == null) {
-			%>
-			<span onclick="checkLoginStatus()">로그인</span>
-			<%
-			} else {
-			%>
-			<span>마이페이지</span> <span><a id="logout"
-				href="LogoutController">로그아웃</a></span>
-			<%
-			}
-			%>
-			<span onclick="openModal('travelBagModal')">나만의 여행가방</span>
-		</div>
-	</header>
+    <!-- Header -->
+    <header>
+       <h1 id="logo" onclick="goToMain()">Travel Mate</h1>
+        <div class="header-icons">
+            <span onclick="openModal('alarmModal')">알람</span>
+            <%if(member == null) {%>
+            <span onclick="checkLoginStatus()">로그인</span>
+            <%} else {%>
+            <span><a href="myPageIndex.jsp">마이페이지</span>
+            <span><a id="logout" href="LogoutController">로그아웃</a></span>
+            <%} %>
+            <span onclick="openModal('travelBagModal')">나만의 여행가방</span>
+        </div>
+    </header>
 
 	<!-- 메인 컨텐츠 -->
 	<main>
