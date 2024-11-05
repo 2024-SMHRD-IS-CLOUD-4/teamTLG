@@ -74,10 +74,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% for(int i = 0; i < board.size(); i++) {%>
+                    
+                    <%for(int i = 0; i < board.size(); i++) {%>
                     <tr>
-                        <td><%=board.get(i).getC_idx() %></td>
-                        <td><%=board.get(i).getC_title() %></td>
+                    	<td><%=board.get(i).getC_idx()%></td>
+                        <td><a href="postView.jsp?c_idx=<%=board.get(i).getC_idx()%>"><%=board.get(i).getC_title() %></a></td>
                         <td><%=board.get(i).getId() %></td>
                         <td><%=board.get(i).getCreated_at() %></td>
                     </tr>

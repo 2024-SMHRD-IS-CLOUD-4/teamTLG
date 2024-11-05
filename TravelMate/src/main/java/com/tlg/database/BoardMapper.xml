@@ -6,6 +6,9 @@
 		insert into community_info (c_idx, c_title, c_content, c_file, created_at, id) values (community_info_seq.nextval, #{c_title}, #{c_content}, #{c_file}, sysdate, #{id}) 
 	</insert>
 	<select id="getBoard" resultType="com.tlg.model.TmBoard">
-		select * from community_info
+		select * from community_info order by c_idx desc
+	</select>
+	<select id="getBoardOne" parameterType="int" resultType="com.tlg.model.TmBoard">
+		select * from community_info where c_idx = #{c_idx}
 	</select>
 </mapper>
