@@ -24,6 +24,18 @@ public class ScheduleController extends HttpServlet {
 	
 	// 여행기록
 	
+	int sche_idx = Integer.parseInt(request.getParameter("sche_idx")); 
+	int tr_idx = Integer.parseInt(request.getParameter("tr_idx")); 
+	String sche_type = request.getParameter("sche_type"); 
+	String sche_dt = request.getParameter("sche_dt"); 
+	String sche_tm = request.getParameter("sche_tm"); 
+	String id = (request.getParameter("id")); 
+	int sche_order = Integer.parseInt(request.getParameter("sche_order")); 
+	String vote_result = request.getParameter("vote_result"); 
+	
+	
+	
+	
 	
 	
 	}

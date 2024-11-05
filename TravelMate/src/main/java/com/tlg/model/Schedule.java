@@ -7,13 +7,13 @@ import lombok.Getter;
 @AllArgsConstructor
 public class Schedule {
 	
-	String sche_idx;
-	String tr_idx;
+	int sche_idx;
+	int tr_idx;
 	String sche_type;
 	String sche_dt;
 	String sche_tm;
 	String id;
-	String sche_order;
+	int sche_order;
 	String vote_result;
 
 }
