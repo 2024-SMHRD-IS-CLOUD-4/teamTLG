@@ -53,11 +53,11 @@
             <input type="password" id="current-password" placeholder="기존 비밀번호를 입력하세요.">
             <input type="password" id="new-password" name="pw" placeholder="새로운 비밀번호를 입력하세요.">
             <input type="text" id="new-username" name="nick" placeholder="바꿀 닉네임을 입력하세요.">
-            </form>
             <div class="modal-buttons">
                 <button onclick="updateInfo()">회원정보 수정</button>
                 <button onclick="closeModal()">닫기</button>
-            </div>         
+            </div>
+            </form>                
         </div>
     </div>
     
@@ -66,12 +66,13 @@
 		<div class="modal-content">
 			<h2>회원탈퇴</h2>
 			<form action="DeleteController" method="post">
-			<input type="password" name="pw" placeholder="기존 비밀번호를 입력하세요.">
-			</form>
+			<input type="password" name="pw" placeholder="기존 비밀번호를 입력하세요."> 
+			
 			<div class="modal-buttons">
 				<button>회원탈퇴</button>
 				<button onclick="closeDeleteModal()">닫기</button>
 			</div>
+			</form>
 		</div>
 	</div>
 
