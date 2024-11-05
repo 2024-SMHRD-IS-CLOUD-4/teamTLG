@@ -4,7 +4,7 @@
     <!-- 스케줄 입력 -->
     <insert id="insertSchedule" parameterType="com.tlg.model.Schedule">
         INSERT INTO TRAVEL_SCHEDULE_INFO (sche_idx, tr_idx, sche_type, sche_dt, id, vote_result)
-        VALUES (#{sche_idx}, #{tr_idx}, #{sche_type}, #{sche_dt}, #{id}, #{vote_result})
+        VALUES (travel_schedule_info_seq.nexval, #{tr_idx}, #{sche_type}, #{sche_dt}, #{id}, #{vote_result})
     </insert>
 
     <!-- 스케줄 찾기 -->

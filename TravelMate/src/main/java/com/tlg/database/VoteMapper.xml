@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tlg.database.VoteMapper">
+
+<!-- 투표입력 -->
+<insert id="insertVote" parameterType="com.tlg.model.Vote">
+	INSERT INTO VOTE_INFO (vote_idx, sche_idx, vote_score, created_at, id, vote_result, tr_idx)
+        VALUES (vote_info_seq.nextval, #{sche_idx}, #{vote_score}, #{create_at}, #{id}, #{vote_result}, #{tr_idx}) 
+</insert>
+
+<!-- 투표출력 -->
+<select id="selectVote" parameterType="com.tlg.model.Vote" resultType="com.tlg.model.Vote">
+	SELECT * FROM VOTE_INFO WHERE ID = #{ID} AND (SCHE_IDX = #{SCHE_IDX} and tr_idx = #{tr_idx})
+</select>
+
+<!-- 투표 항목출력 -->
+<select id="choice" parameterType="com.tlg.model.Vote" resultType="com.tlg.model.Vote">
+	
+</select>
+<!-- 결과출력 -->
+
+</mapper>
