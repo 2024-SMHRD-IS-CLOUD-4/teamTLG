@@ -96,7 +96,7 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
 			<div class="logo-placeholder">로고</div>
 			<form action="LoginController" method="post">
 				<input type="text" name="id" placeholder="아이디를 입력해주세요."> <input
-					type="text" name="pw" placeholder="비밀번호를 입력해주세요.">
+					type="password" name="pw" placeholder="비밀번호를 입력해주세요.">
 				<button>로그인</button>
 			</form>
 			<a href="#" class="google-btn">google로 로그인하기</a> <span
