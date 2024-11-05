@@ -1,3 +1,7 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="com.tlg.model.TravelPlanDAO"%>
+<%@page import="com.tlg.model.TravelPlan"%>
 <%@page import="com.tlg.model.TmMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -12,6 +16,11 @@
 	<%
 		// 세션 영역 안에 있는 사용자의 id를 가져오기!
 		TmMember member = (TmMember)session.getAttribute("member");
+		TravelPlan plan = (TravelPlan)session.getAttribute("plan");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		TravelPlanDAO tpDao = new TravelPlanDAO();
+	    
 	%>
 <body>
 
@@ -48,7 +57,36 @@
         </div>
         <div class="lists">
             <div class="list-item">최근 리뷰 게시글</div>
-            <div class="list-item">나의 여행 계획 List</div>
+				<div class="list-item">나의 여행 계획 List
+                <ul id="travel-plan-list">
+                    <%
+                        if (member != null) {
+                            List<TravelPlan> travelPlans = tpDao.selectPlans(member.getId()); // 사용자의 여행 계획 가져오기
+                            if (travelPlans != null && !travelPlans.isEmpty()) {
+                                for (TravelPlan plans : travelPlans) {
+                    %>
+	                   <li>
+						    <a href="kb_index.html?id=<%= plans.getId() %>&travelIndex=<%= plans.getTr_idx() %>">
+						        <%= plans.getTr_title() %> - 
+						        <%= dateFormat.format(plans.getTr_st_dt()) %> ~ 
+						        <%= dateFormat.format(plans.getTr_ed_dt()) %>
+						    </a>
+						</li>
+                    <%
+                                }
+                            } else {
+                    %>
+                    <li>여행 계획이 없습니다.</li>
+                    <%
+                            }
+                        } else {
+                    %>
+                    <li>로그인 후 여행 계획을 확인할 수 있습니다.</li>
+                    <%
+                        }
+                    %>
+                </ul>
+            </div>
         </div>
     </main>
 

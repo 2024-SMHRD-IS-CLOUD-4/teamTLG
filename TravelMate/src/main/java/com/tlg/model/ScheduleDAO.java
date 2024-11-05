@@ -1,20 +1,25 @@
 package com.tlg.model;
 
-import com.tlg.database.SqlSessionManager;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 
 public class ScheduleDAO {
+	
+	SqlSessionFactory factory = com.tlg.database.SqlSessionManager.getSqlSessionFactory();
+
     
-    public void insertSchedule(Schedule schedule) {
-        try (SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession()) {
-            session.insert("TravelScheduleMapper.insertSchedule", schedule);
-            session.commit();
-        }
+    public int insertSchedule(Schedule schedule) {
+    	SqlSession session = factory.openSession(true);
+		int result = session.insert("ScheduleMapper.insertSchedule",schedule);
+		session.close();
+		return result;
+        
     }
 
     public Schedule selectSchedule(String scheduleId) {
-        try (SqlSession session = SqlSessionManager.getSqlSessionFactory().openSession()) {
-            return session.selectOne("TravelScheduleMapper.selectSchedule", scheduleId);
-        }
+    	SqlSession session = factory.openSession(true);
+		Schedule result = session.selectOne("ScheduleMapper.insertSchedule",scheduleId);
+		session.close();
+		return result;
     }
 }

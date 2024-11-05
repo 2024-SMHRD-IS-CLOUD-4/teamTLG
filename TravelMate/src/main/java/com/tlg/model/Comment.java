@@ -24,6 +24,14 @@ public class Comment {
 		this.id = id;
 		this.tr_idx = tr_idx;
 	}
+
+	public Comment(String id, int tr_idx) {
+		super();
+		this.id = id;
+		this.tr_idx = tr_idx;
+	}
+	
+	
 	
 	
 	
