@@ -1,0 +1,95 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.checklist-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 70%;
+    height: 70%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+#taskInput {
+    width: calc(100% - 60px);
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    width:29px;
+    height:29px;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5); /* 기본 그림자 */
+    transition: box-shadow 0.2s ease; /* 부드러운 전환 효과 */
+}
+
+button:active {
+    background-color: #dccd16;
+     box-shadow: none; /* 그림자 제거 */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+li {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+button.delete {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+button.delete:hover {
+    background-color: #ff4d4d;
+}
+
+#clearAllBtn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    font-size: 16px;
+}
+
+#clearAllBtn:hover {
+    background-color: #e53935;
+}
