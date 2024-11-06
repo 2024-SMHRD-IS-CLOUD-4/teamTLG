@@ -130,7 +130,7 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
             <input type="date" name="tr_st_dt" required>
             <label>종료 날짜:</label>
             <input type="date" name="tr_ed_dt" required>
-            <button type="submit">저장한다진짜???</button>
+            <button type="submit">save</button>
         </form>
     </div>
    <!--  <div id="toastMessage">여행 계획이 저장되었습니다.</div> -->
