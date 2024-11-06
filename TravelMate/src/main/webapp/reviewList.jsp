@@ -27,7 +27,7 @@
             <li><a href="notice.html">Notice</a></li>
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="reviewList.jsp" class="active">Review</a></li> <!-- 활성화된 메뉴 -->
-            <li><a href="infoTokyo.html">Info.Tokyo</a></li>
+            <li><a href="https://www.japan.travel/ko/destinations/kanto/tokyo/" target="_blank">Info.Tokyo</a></li>
         </ul>
     </nav>
 
