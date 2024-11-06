@@ -1,24 +1,62 @@
-/* General styles */
-* {
-    box-sizing: border-box;
-}
-
 body {
     font-family: Arial, sans-serif;
-    background-color: #e0f7fa;
-    display: flex;
-    justify-content: center;
+    color: #4a4a4a;
+    background-color: #e0ebf4;
     margin: 0;
+    padding: 0;
+    text-align: center;
 }
 
+a { text-decoration:none }
+
+.header-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: white;
+    max-width: 1200px; /* 최대 넓이 제한 */
+    margin: 0 auto;    /* 화면 가운데 정렬 */
+}
+
+.header-title {
+    font-size: 4rem;
+    color: #b08584;
+    margin: 0;
+    cursor: pointer;
+}
+
+.header-icons {
+    position: absolute;
+    right: 20px;  /* 오른쪽에 고정 위치 */
+    display: flex;
+    gap: 15px; /* 아이콘 간의 간격 */
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.header-icons span {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header-icons span span {
+    margin-left: 5px;
+    color: #333;
+}
+
+
 .container {
-    width: 90%;
-    max-width: 800px;
+    width: 80%;
+    max-width: 1200px;
     background-color: #f9f9f9;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    margin-top: 40px; /* 상단 여백 */
+/*     margin-top: 40px; 상단 여백 */
+    margin: 40px auto; /* 수평 중앙 정렬과 상단 여백 */
 }
 
 /* Header 스타일 */
@@ -124,6 +162,7 @@ body {
     border: 1px solid #ddd;
     border-radius: 4px;
     resize: none;
+    box-sizing: border-box; /* padding과 border를 너비에 포함 */
 }
 
 .comment-counter {

@@ -3,12 +3,6 @@ body {
     background-color: #f5f7fa;
 }
 
-header h1 {
-    text-align: center;
-    font-size: 2rem;
-    color: #b08584;
-}
-
 .profile-section {
     text-align: center;
     margin-top: 30px;
@@ -35,7 +29,7 @@ header h1 {
 }
 
 .travel-plan-list {
-    width: 70%;
+    width: 63%;
     margin: 20px auto;
     background-color: #ffffff;
     padding: 15px;

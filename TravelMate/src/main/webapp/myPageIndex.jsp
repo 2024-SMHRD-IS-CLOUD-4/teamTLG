@@ -9,15 +9,10 @@
     <title>마이페이지</title>
     <link rel="stylesheet" href="assets/css/myPageStyle.css">
 </head>
-<%
-		// 세션 영역 안에 있는 사용자의 id를 가져오기!
-		TmMember member = (TmMember)session.getAttribute("member");
-%>
 <body>
-    <header>
-        <h1>Travel Mate</h1>
-    </header>
-    
+
+	<%@ include file = "header.jsp" %>
+	
     <main>
         <section class="profile-section">
             <label for="profile-image-upload" class="profile-image-label">
@@ -54,10 +49,11 @@
             <input type="password" id="new-password" name="pw" placeholder="새로운 비밀번호를 입력하세요.">
             <input type="text" id="new-username" name="nick" placeholder="바꿀 닉네임을 입력하세요.">
             <div class="modal-buttons">
-                <button onclick="updateInfo()">회원정보 수정</button>
-                <button onclick="closeModal()">닫기</button>
+                <button>회원정보 수정</button>
+                <button type="button" onclick="closeModal()">닫기</button>
             </div>
-            </form>                
+            </form>
+                     
         </div>
     </div>
     
@@ -66,11 +62,11 @@
 		<div class="modal-content">
 			<h2>회원탈퇴</h2>
 			<form action="DeleteController" method="post">
-			<input type="password" name="pw" placeholder="기존 비밀번호를 입력하세요."> 
+			<input type="password" name="pw" placeholder="기존 비밀번호를 입력하세요.">
 			
 			<div class="modal-buttons">
 				<button>회원탈퇴</button>
-				<button onclick="closeDeleteModal()">닫기</button>
+				<button type="button" onclick="closeDeleteModal()">닫기</button>
 			</div>
 			</form>
 		</div>

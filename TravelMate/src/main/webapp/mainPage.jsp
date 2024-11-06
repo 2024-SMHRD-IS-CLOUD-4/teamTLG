@@ -15,42 +15,28 @@
 </head>
 <%
 // 세션 영역 안에 있는 사용자의 id를 가져오기!
-TmMember member = (TmMember) session.getAttribute("member");
 TravelPlan plan = (TravelPlan) session.getAttribute("plan");
 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
 TravelPlanDAO tpDao = new TravelPlanDAO();
 %>
 
 <body>
-    <!-- Header -->
-    <header>
-       <h1 id="logo" onclick="goToMain()">Travel Mate</h1>
-        <div class="header-icons">
-            <span onclick="openModal('alarmModal')">알람</span>
-            <%if(member == null) {%>
-            <span onclick="checkLoginStatus()">로그인</span>
-            <%} else {%>
-            <span><a href="myPageIndex.jsp">마이페이지</a></span>
-            <span><a id="logout" href="LogoutController">로그아웃</a></span>
-            <%} %>
-            <span onclick="openModal('travelBagModal')">나만의 여행가방</span>
-        </div>
-    </header>
 
-	<!-- 메인 컨텐츠 -->
+
+	<%@ include file="header.jsp" %>
+	
 	<main>
 		<div class="content">
-			<a href="#" class="content-card"
+			<a href="#" class="content-card fade-in-up"
 				style="background-image: url('img/tokyoView.png');">
 				<p class="card-text">도쿄 여행 꿀팁</p>
-			</a> <a href="#" class="content-card"
+			</a> <a href="#" class="content-card fade-in-up"
 				style="background-image: url('img/tako.png');">
 				<p class="card-text">도쿄 맛집 list</p>
-			</a> <a href="#" class="content-card"
+			</a> <a href="#" class="content-card fade-in-up"
 				style="background-image: url('img/course.jpg');">
 				<p class="card-text">추천 여행코스</p>
-			</a> <a href="reviewList.jsp" class="content-card"
+			</a> <a href="reviewList.jsp" class="content-card fade-in-up"
 				style="background-image: url('img/bestReview.png');">
 				<p class="card-text">여행 게시판</p>
 			</a>
@@ -95,8 +81,8 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
 			<button class="close-btn" onclick="closeModal('loginModal')">X</button>
 			<div class="logo-placeholder">로고</div>
 			<form action="LoginController" method="post">
-				<input type="text" name="id" placeholder="아이디를 입력해주세요."> <input
-					type="password" name="pw" placeholder="비밀번호를 입력해주세요.">
+				<input type="text" name="id" placeholder="아이디를 입력해주세요.">
+				<input type="password" name="pw" placeholder="비밀번호를 입력해주세요.">
 				<button>로그인</button>
 			</form>
 			<a href="#" class="google-btn">google로 로그인하기</a> <span
@@ -129,5 +115,20 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
 
 	<!-- JavaScript 파일 연결 -->
 	<script src="assets/js/mainScript.js"></script>
+	 <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+
+            const fadeElements = document.querySelectorAll(".fade-in-up");
+            fadeElements.forEach((el) => observer.observe(el));
+        });
+    </script>
 </body>
 </html>

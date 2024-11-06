@@ -9,13 +9,29 @@
     <title>Travel Mate - 리뷰 작성</title>
     <link rel="stylesheet" href="assets/css/reviewForm_style.css">
 </head>
-<% TmMember member = (TmMember)session.getAttribute("member"); %>
+<%
+	TmMember member = (TmMember) session.getAttribute("member");
+%>
 <body>
-    <header>
-        <h1 id="logo" onclick="navigateToReviewList()">Travel Mate</h1>
-        <h2>Review</h2>
+    <header class="header-container">
+        <h1 onclick="goToMain()" class="header-title">Travel Mate</h1>
+        <nav class="header-icons">
+            <%
+            if (member == null) {
+            %>
+            <span onclick="checkLoginStatus()">로그인</span>
+            <%
+            } else {
+            %>
+            <span onclick="openModal('alarmModal')">🔔<span>알람</span></span>
+            <span>👤<a href="myPageIndex.jsp"><span>my page</span></a></span>
+            <span><a id="logout" href="LogoutController">로그아웃</a></span>
+            <span onclick="openChecklist()">나만의 여행가방</span>
+            <%
+            }
+            %>
+        </nav>
     </header>
-    
     <main>
         <form action="WriteController" method="post" enctype="multipart/form-data">
             <label for="title">제목을 입력하세요.</label>
@@ -36,5 +52,6 @@
             <button type="submit">포스팅</button>      
 		</form>
     </main>
+<script src="assets/js/mainScript.js"></script>
 </body>
 </html>

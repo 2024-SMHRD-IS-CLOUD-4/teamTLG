@@ -1,3 +1,4 @@
+
 // 로그인 여부를 확인하는 변수
 let isLoggedIn = false;
 
@@ -39,5 +40,3 @@ function closeModal(modalId) {
 function goToMain() {
 	location.href="mainPage.jsp"
 }
-
-
