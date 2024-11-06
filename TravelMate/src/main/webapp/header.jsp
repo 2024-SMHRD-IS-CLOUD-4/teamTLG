@@ -26,12 +26,23 @@
             <span onclick="openModal('alarmModal')">🔔<span>알람</span></span>
             <span>👤<a href="myPageIndex.jsp"><span>my page</span></a></span>
             <span><a id="logout" href="LogoutController">로그아웃</a></span>
-            <span onclick="openChecklist()">나만의 여행가방</span>
+            <span onclick="openCheckList()">나만의 여행가방</span>
             <%
             }
             %>
         </nav>
     </header>
 <script src="assets/js/header.js"></script>
+<script>
+	function openCheckList() {
+		// URL, 창 이름, 창 옵션 설정
+		const url = "checkList.jsp";
+		const name = "_blank"; // _blank는 새 창을 의미
+		const options = "width=800,height=600,top=100,left=200";
+	
+		// 새 창 열기
+		window.open(url, name, options);
+	}
+</script>
 </body>
 </html>
