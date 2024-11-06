@@ -117,21 +117,23 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
 		</div>
 	</div>
 	
-	<!-- 여행 계획 입력 폼 모달 -->
+	
+	
+	    <!-- 여행 계획 입력 폼 모달 -->
     <div id="planFormModal" class="modal" style="display: none;">
     <div class="modal-content">
         <button class="close-btn" onclick="closePlanForm()">X</button>
         <h2>새로운 여행 계획</h2>
-        <form id="planForm" action="TravelPlanController" method="post">
-            	<input type="text" name="tr_title" placeholder="여행 제목을 입력하세요" required>
+        <form id="planForm" action="TravelPlanController" method="post" >
+            <input type="text" name="tr_title" placeholder="여행 제목을 입력하세요" required>
             <label>시작 날짜:</label>
-            	<input type="date" name="tr_st_dt" required>
+            <input type="date" name="tr_st_dt" required>
             <label>종료 날짜:</label>
-            	<input type="date" name="tr_ed_dt" required>
-            	<!-- <input type="text" name="partner_name" placeholder="동행할 사람 이름을 입력하세요"> -->
-            <button type="submit" onclick="submitTravelPlan()">저장한다진짜???</button>
+            <input type="date" name="tr_ed_dt" required>
+            <button type="submit">저장한다진짜???</button>
         </form>
     </div>
+   <!--  <div id="toastMessage">여행 계획이 저장되었습니다.</div> -->
 </div>
 
 	<!-- JavaScript 파일 연결 -->

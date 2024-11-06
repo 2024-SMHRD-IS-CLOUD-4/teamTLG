@@ -4,9 +4,9 @@
     
     <!-- 여행 계획 정보 삽입 - 내용없이 개요만 -->
     <insert id="insertPlan" parameterType="com.tlg.model.TravelPlan">
-        INSERT INTO TRAVEL_PLAN_INFO (tr_idx, id, tr_title, tr_st_dt, tr_ed_dt)
-        VALUES (#{tr_idx} , #{id}, #{tr_title}, #{tr_st_dt}, #{tr_ed_dt})
-    </insert>
+    INSERT INTO travel_plan_info (tr_idx, id, tr_title, tr_st_dt, tr_ed_dt)
+    VALUES (#{tr_idx, jdbcType=VARCHAR}, #{id}, #{tr_title}, #{tr_st_dt, jdbcType=DATE}, #{tr_ed_dt, jdbcType=DATE})
+	</insert>
     
     <!-- 여행 계획 정보 수정 -->
     <update id="updateTravelPlan" parameterType="com.tlg.model.TravelPlan">
