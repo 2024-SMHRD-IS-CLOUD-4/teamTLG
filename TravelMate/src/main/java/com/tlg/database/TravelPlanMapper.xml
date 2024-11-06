@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tlg.database.TravelPlanMapper">
-    <!-- 여행 계획 정보 삽입 -->
+    
+    <!-- 여행 계획 정보 삽입 - 내용없이 개요만 -->
     <insert id="insertPlan" parameterType="com.tlg.model.TravelPlan">
-        INSERT INTO TRAVEL_PLAN_INFO (tr_idx, id, tr_title, tr_st_dt, tr_ed_dt, tr_desc)
-        VALUES (travel_plan_info_seq.nextval , #{id}, #{tr_title}, #{tr_st_dt}, #{tr_ed_dt}, #{tr_desc})
+        INSERT INTO TRAVEL_PLAN_INFO (tr_idx, id, tr_title, tr_st_dt, tr_ed_dt)
+        VALUES (#{tr_idx} , #{id}, #{tr_title}, #{tr_st_dt}, #{tr_ed_dt})
     </insert>
+    
+    <!-- 여행 계획 정보 수정 -->
+    <update id="updateTravelPlan" parameterType="com.tlg.model.TravelPlan">
+    UPDATE TRAVEL_PLAN_INFO SET tr_title = #{tr_title}, tr_st_dt = #{tr_st_dt}, tr_ed_dt = #{tr_ed_dt}, tr_desc = #{tr_desc}
+    WHERE id = #{id} and tr_idx = #{tr_idx}
+	</update>
 
     <!-- 여행 계획 정보 조회 -->
     <select id="selectPlan" parameterType="String" resultType="com.tlg.model.TravelPlan">
@@ -15,11 +22,21 @@
     <!-- 댓글입력 -->
     <insert id="PlanComment_input" parameterType = "com.tlg.model.Comment">
     	INSERT INTO COMMENT_INFO (cmt_idx, c_idx, cmt_content, created_at, cmt_heart, id, tr_idx)
-    	VALUES (comment_info_seq.nextval, #{c_idx}, #{cmt_content}, #{created_at}, #{cmt_heart}, #{id}, #{tr_idx})
+    	VALUES (#{cmt_idx} , #{c_idx}, #{cmt_content}, #{created_at}, #{cmt_heart}, #{id}, #{tr_idx})
     </insert>
     
     <!-- 댓글출력 -->
     <select id="PlanComment_output" parameterType="com.tlg.model.Comment" resultType="com.tlg.model.Comment">
     	SELECT * FROM COMMENT_INFO WHERE tr_idx = #{tr_idx} and id = #{id}
+    </select>
+    
+    <!-- 동행자입력  -->
+    <insert id="partner_input" parameterType = "com.tlg.model.Partner">
+    	INSERT INTO partner_info (tr_idx, partner_name) VALUES (#{tr_idx}, #{partner_name})
+    </insert>
+    
+    <!-- 동행자출력 -->
+    <select id="partner_output" parameterType="com.tlg.model.Partner" resultType="com.tlg.model.Partner">
+    	SELECT * FROM partner_info WHERE tr_idx = #{tr_idx} and id = #{id}
     </select>
 </mapper>

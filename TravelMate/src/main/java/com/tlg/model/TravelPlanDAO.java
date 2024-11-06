@@ -11,10 +11,11 @@ public class TravelPlanDAO {
 
 	public int insertPlan(TravelPlan plan) {
 		SqlSession session = factory.openSession(true);
-		int result = session.insert("TravelPlanMapper.insertPlan", plan);
+		int result = session.insert("com.tlg.database.TravelPlanMapper.insertPlan", plan);
 		session.close();
 		return result;
 	}
+	
 
 	public List<TravelPlan> selectPlans(String id) {
 	    SqlSession session = factory.openSession();
@@ -28,4 +29,29 @@ public class TravelPlanDAO {
 	    }
 	    return result;
 	}
+	
+	// 동행자 입력
+	public int insertPartner(Partner partner) {
+		SqlSession session = factory.openSession(true);
+		int result = session.insert("com.tlg.database.TravelPlanMapper.partner_input", partner);
+		session.close();
+		return result;
+	}
+	
+	// 동행자 출력
+	
+	public List<Partner> selectPartner(Partner partner) {
+	    SqlSession session = factory.openSession();
+	    List<Partner> result = null;
+	    try {
+	        result = session.selectList("TravelPlanMapper.partner_output", partner);
+	    } catch (Exception e) {
+	        e.printStackTrace(); // 오류 로그 출력
+	    } finally {
+	        session.close();
+	    }
+	    return result;
+	}
+	
+	
 }
