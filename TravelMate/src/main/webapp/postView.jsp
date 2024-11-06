@@ -23,6 +23,8 @@
 %>
 <body>
 
+	<%@ include file = "header.jsp" %>
+
     <!-- 메인 컨텐츠 -->
     <main class="container">
         <table class="table table-bordered">

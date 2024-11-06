@@ -13,16 +13,13 @@
     <link rel="stylesheet" href="assets/css/reviewListStyle.css">
 </head>
 <%
-	TmMember member = (TmMember)session.getAttribute("member");
-
 	BoardDAO dao = new BoardDAO();
 	
 	List<TmBoard> board = dao.getBoard();
 %>
 <body>
-    <header>
-        <h1>Travel Mate</h1>
-    </header>
+    
+    <%@ include file="header.jsp" %>
     
     <nav>
         <ul>
@@ -86,7 +83,7 @@
                 </tbody>
             </table>
             <%if(member != null) {%>
-            <button onclick="createPost()"><a href="reviewFormIndex.jsp">게시글 작성하기</a></button>
+            <button onclick="location.href='reviewFormIndex.jsp'">게시글 작성하기</button>
             <%} else {%>
             <button onclick="needLogin()">게시글 작성하기</button>
             <%} %>

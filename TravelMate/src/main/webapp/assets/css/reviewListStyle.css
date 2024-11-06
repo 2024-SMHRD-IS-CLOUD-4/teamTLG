@@ -1,18 +1,11 @@
 /* 기본 스타일 설정 */
-body {
+ body {
     font-family: Arial, sans-serif;
     color: #4a4a4a;
     background-color: #e0ebf4;
     margin: 0;
     padding: 0;
     text-align: center;
-}
-
-/* 헤더 스타일 */
-header {
-    font-size: 2rem;
-    color: #b08584;
-    margin: 20px 0;
 }
 
 /* 네비게이션 스타일 */
@@ -45,10 +38,14 @@ nav ul li a.active {
 /* 공지사항 섹션 */
 .announcement {
     background-color: #c4b9aa;
+    width: 65.4%;           
     padding: 10px;
     font-weight: bold;
-    margin: 20px 0;
+    margin: 20px auto;     /* 상하 여백 20px, 좌우 중앙 정렬 */
+    text-align: center;    /* 텍스트 중앙 정렬 (선택 사항) */
+    box-sizing: border-box; /* 패딩 포함하여 너비유지 */
 }
+
 
 /* Best Reviews 섹션 */
 .best-reviews {
@@ -109,7 +106,10 @@ nav ul li a.active {
 .recent-posts {
     background-color: #f7f8fa;
     padding: 20px;
-    margin-bottom: 20px;
+    margin: 20px auto; /* 상하 여백 20px, 좌우 자동 정렬 */
+    width: 65.4%;
+    text-align: center;    /* 텍스트 중앙 정렬 (선택 사항) */
+    box-sizing: border-box; /* 패딩 포함하여 너비유지 */
 }
 
 .recent-posts h2 {
