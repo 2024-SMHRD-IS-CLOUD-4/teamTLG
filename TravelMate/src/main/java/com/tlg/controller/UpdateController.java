@@ -34,7 +34,7 @@ public class UpdateController extends HttpServlet {
 			session.setAttribute("member", updateMember);
 			response.sendRedirect("mainPage.jsp");
 		} else {
-			response.sendRedirect("myPageScript.jsp");
+			response.sendRedirect("myPageIndex.jsp");
 		}
 	}
 

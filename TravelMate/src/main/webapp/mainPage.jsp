@@ -38,7 +38,7 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
 				<p class="card-text">추천 여행코스</p>
 			</a> <a href="reviewList.jsp" class="content-card fade-in-up"
 				style="background-image: url('img/bestReview.png');">
-				<p class="card-text">여행 게시판11</p>
+				<p class="card-text">여행 게시판</p>
 			</a>
 		</div>
 		<div class="lists">
