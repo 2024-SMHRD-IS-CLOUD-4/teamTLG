@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     color: #4a4a4a;
-    background-color:white;
+    background-color: white;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -15,9 +15,11 @@ a { text-decoration:none }
     justify-content: center;
     align-items: center;
     padding: 10px 20px;
-    background-color: white;
+    background-color: beige;
     max-width: 1200px; /* 최대 넓이 제한 */
     margin: 0 auto;    /* 화면 가운데 정렬 */
+    border: 2px solid #b08584; /* 두께, 스타일, 색상 */
+    border-radius: 10px; /* 테두리의 모서리를 둥글게 (옵션) */
 }
 
 .header-title {

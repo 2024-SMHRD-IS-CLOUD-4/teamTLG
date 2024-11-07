@@ -23,38 +23,29 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
 
 <body>
 
-
+	<div class="page-wrapper">
+	<main class="content-wrapper">
 	<%@ include file="header.jsp"%>
 
 	<main>
 		<div class="content">
-			<a href="#" class="content-card fade-in-up"
+			<!-- <a href="#" class="content-card fade-in-up"
 				style="background-image: url('img/tokyoView.png');">
 				<p class="card-text">도쿄 여행 꿀팁</p>
-			</a> <a href="#" class="content-card fade-in-up"
-				style="background-image: url('img/tako.png');">
-				<p class="card-text">도쿄 맛집 list</p>
-			</a> <a href="#" class="content-card fade-in-up"
+			</a> --> <a href="#" class="content-card fade-in-up"
 				style="background-image: url('img/course.jpg');">
 				<p class="card-text">추천 여행코스</p>
 			</a> <a href="reviewList.jsp" class="content-card fade-in-up"
 				style="background-image: url('img/bestReview.png');">
 				<p class="card-text">여행 게시판</p>
 			</a>
-		</div>
-		
-		 <!-- 여행 계획 버튼 -->
-	    <% if (member != null) { %>
-	        <button onclick="openPlanForm()">여행 계획 짜기</button>
-	    <% } else { %>
-	        <button onclick="openModal('loginModal')">로그인 후 이용 가능</button>
-	    <% } %>
-		
-		
-		<div class="lists">
-			<div class="list-item">최근 리뷰 게시글 출력해주기</div>
-			<div class="list-item">
-				나의 여행 계획 List
+			<a href="https://www.data.jma.go.jp/multi/yoho/yoho_detail.html?code=130010&lang=kr" class="content-card fade-in-up"
+				style="background-image: url('img/sky.jpg');" target=_blank>
+				<p class="card-text">오늘의 도쿄 날씨</p>
+			</a> 
+			
+			<div class="content-card3 fade-in-up"><p class="card-text2">나의 여행 계획 List</p>
+			
 				<ul id="travel-plan-list">
 					<%
 					if (member != null) {
@@ -75,9 +66,16 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
                 <% } else { %>
                     <li>로그인 후 여행 계획을 확인할 수 있습니다.</li>
                 <% }}%>
-            </ul>
-        </div>
-    </div>
+           		</ul>
+        	</div>
+		</div>
+		
+		 <!-- 여행 계획 버튼 -->
+	    <% if (member != null) { %>
+	        <button class="plan-button fade-in-up" onclick="openPlanForm()">여행 계획 짜기</button>
+	    <% } else { %>
+	    	<button class="plan-button fade-in-up" onclick="alert('로그인 후 이용 가능합니다'); openModal('loginModal')">여행 계획 짜기</button>
+	    <% } %>
 	</main>
 
 	<!-- 로그인 모달 -->
@@ -134,6 +132,8 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
         </form>
     </div>
    <!--  <div id="toastMessage">여행 계획이 저장되었습니다.</div> -->
+</div>
+</main>
 </div>
 
 	<!-- JavaScript 파일 연결 -->
