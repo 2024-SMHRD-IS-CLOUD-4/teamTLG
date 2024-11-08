@@ -3,168 +3,81 @@ let cardCounter = 0;
 let draggedColumn = null;
 let draggedCard = null;
 
-function createColumns(days) {
-    const board = document.getElementById('kanban-board');
-    board.innerHTML = ''; // 기존 열 초기화
-    dayCount = days;
+$(document).ready(function () {
+    // URL에서 tr_idx 값을 가져옵니다.
+    const urlParams = new URLSearchParams(window.location.search);
+    const tr_idx = urlParams.get('tr_idx');
 
-    for (let i = 1; i <= dayCount; i++) {
-        addDayColumn(i); // 각 날짜에 대해 열 추가
+    if (tr_idx) {
+        loadKanbanBoard(tr_idx); // tr_idx에 맞는 Kanban 보드를 로드합니다.
+    } else {
+        console.error('tr_idx가 제공되지 않았습니다.');
     }
+});
 
-    initializeDragAndDrop(); // 드래그 앤 드롭 초기화
-}
+// 초기 데이터를 서버에서 가져와 Kanban 보드에 설정하는 함수
+function loadKanbanBoard(tr_idx) {
+	$.ajax({
+		url: '/TravelMate/KanbanController',
+		type: 'GET',
+		data: { tr_idx: tr_idx },
+		dataType: 'json',
+		success: function(data) {
+			console.log("로드된 데이터:", data);
+			const kanbanBoard = $('#kanban-board');
+			kanbanBoard.empty(); // 기존 보드 내용을 지웁니다.
 
-function addDayColumn(dayNumber) {
-    const board = document.getElementById('kanban-board');
+			data.forEach(day => {
+				const dayId = `day-${day.col_idx}`;
 
-    const column = document.createElement('div');
-    column.className = 'kanban-column';
-    column.id = `day-${dayNumber}`;
+				// Day 컬럼 생성
+				if (!$(`#${dayId}`).length) {
+					addDayColumn(day.col_idx, day.col_title);
+				}
 
-    const headerContainer = document.createElement('div');
-    headerContainer.className = 'header-container';
+				// 이미 존재하는 카드가 없는 경우에만 추가
+				if (day.cards && day.cards.length > 0) {
+					day.cards.forEach(card => {
+						const cardId = `${day.col_idx}-card-${card.card_idx}`;
+						if (!$(`#${cardId}`).length) {
+							addCard(day.col_idx, card.card_idx, card.card_title);
+						}
+					});
+				}
+			});
+			
+			
 
-    const header = document.createElement('h2');
-    header.textContent = `Day ${dayNumber}`;
-    headerContainer.appendChild(header);
-
-    const deleteColumnButton = document.createElement('button');
-    deleteColumnButton.className = 'delete-column-button';
-    deleteColumnButton.textContent = 'X';
-    deleteColumnButton.onclick = () => deleteColumn(column); // 열 삭제
-    headerContainer.appendChild(deleteColumnButton);
-
-    column.appendChild(headerContainer);
-
-    const editButton = document.createElement('button');
-    editButton.className = 'edit-button';
-    editButton.textContent = 'Edit';
-    editButton.onclick = () => toggleEditMode(column, editButton); // 편집 모드 전환
-    column.appendChild(editButton);
-
-    const itemsContainer = document.createElement('div');
-    itemsContainer.className = 'kanban-items';
-    column.appendChild(itemsContainer);
-
-    const addButton = document.createElement('button');
-    addButton.className = 'add-card-button';
-    addButton.textContent = "+ Add Card";
-    addButton.onclick = () => addCard(column.id); // 카드 추가
-    column.appendChild(addButton);
-
-    column.setAttribute('draggable', 'true');
-    column.addEventListener('dragstart', dragStartColumn);
-    column.addEventListener('dragend', dragEndColumn);
-
-    board.appendChild(column);
-}
-
-function addCard(columnId) {
-    const column = document.getElementById(columnId).querySelector('.kanban-items');
-
-    const card = document.createElement('div');
-    card.className = 'kanban-card';
-
-    const uniqueId = `${columnId}-card-${cardCounter++}`;
-    card.dataset.id = uniqueId;
-
-    const textarea = document.createElement('textarea');
-    textarea.className = 'card-input';
-    textarea.placeholder = 'Enter event title';
-    textarea.wrap = 'soft';
-    textarea.addEventListener('input', autoResize); // 자동 크기 조절
-
-    card.appendChild(textarea);
-    column.appendChild(card);
-    textarea.focus();
-
-    // 블러 이벤트로 카드 제목 저장 후 세부 페이지로 이동할 수 있도록 클릭 이벤트 추가
-    textarea.addEventListener('blur', () => {
-        if (textarea.value.trim() !== '') {
-            card.textContent = textarea.value;
-            card.addEventListener('click', openDetailPage); // 클릭 시 세부 페이지 이동
-        } else {
-            card.remove(); // 내용이 없으면 카드 삭제
-        }
-    });
-
-    textarea.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Enter키 입력 방지
-        }
-    });
-
-    card.setAttribute('draggable', 'true');
-    card.addEventListener('dragstart', dragStart);
-    card.addEventListener('dragend', dragEnd);
-}
-
-function openDetailPage(event) {
-    const card = event.currentTarget;
-    const uniqueId = card.dataset.id;
-    const url = `kb_sub.jsp?id=${uniqueId}`; // 세부 페이지 URL
-    window.open(url, '_blank'); // 새 탭에서 열기
-}
-
-function deleteColumn(column) {
-    if (confirm("해당 날짜를 지우시겠습니까? 해당 날의 일정이 전부 삭제됩니다!")) {
-        column.remove(); // 열 삭제
-        updateDayNumbers(); // 열 번호 업데이트
-        initializeDragAndDrop(); // 드래그 앤 드롭 초기화
-    }
+			// 새로 생성된 요소들에 드래그 앤 드롭 기능 초기화
+			initializeDragAndDrop();
+			updateDayNumbers(); // 컬럼 순서에 따라 Day 번호 업데이트
+		},
+		error: function(xhr, status, error) {
+			console.error('데이터를 로드하는 중 오류가 발생했습니다:', error);
+		}
+	});
 }
 
 function addNewDay() {
     dayCount++;
     addDayColumn(dayCount); // 새로운 열 추가
     initializeDragAndDrop(); // 드래그 앤 드롭 초기화
-}
-
-function updateDayNumbers() {
-    const columns = document.querySelectorAll('.kanban-column');
-    dayCount = columns.length;
-
-    columns.forEach((column, index) => {
-        const dayNumber = index + 1;
-        const header = column.querySelector('h2');
-        header.textContent = `Day ${dayNumber}`;
-        column.id = `day-${dayNumber}`; // 열 ID 업데이트
-
-        const addButton = column.querySelector('.add-card-button');
-        addButton.onclick = () => addCard(column.id); // 카드 추가 핸들러 업데이트
-    });
-}
-
-function toggleEditMode(column, editButton) {
-    const isEditing = editButton.textContent === 'Edit';
-    editButton.textContent = isEditing ? 'Save' : 'Edit'; // 버튼 텍스트 전환
-
-    const cards = column.querySelectorAll('.kanban-card');
-    cards.forEach(card => {
-        if (isEditing) {
-            const currentText = card.textContent;
-            card.innerHTML = '';
-            const input = document.createElement('textarea');
-            input.className = 'card-input';
-            input.value = currentText;
-            input.addEventListener('input', autoResize);
-
-            const deleteButton = document.createElement('button');
-            deleteButton.className = 'delete-button';
-            deleteButton.textContent = 'X';
-            deleteButton.onclick = () => card.remove(); // 카드 삭제
-
-            card.appendChild(input);
-            card.appendChild(deleteButton);
-
-            card.removeEventListener('click', openDetailPage); // 클릭 이벤트 제거
-        } else {
-            const input = card.querySelector('textarea');
-            if (input && input.value.trim() !== '') {
-                card.textContent = input.value; // 입력값으로 카드 텍스트 업데이트
-                card.addEventListener('click', openDetailPage); // 클릭 이벤트 다시 추가
-            }
+    
+    // 서버에 새로운 Day 컬럼 저장 요청
+    $.ajax({
+        url: '/TravelMate/KanbanController', // KanbanController의 URL입니다.
+        type: 'POST',
+        data: JSON.stringify({
+            action: 'createColumn',
+            col_title: `Day ${dayCount}`,
+            tr_idx: tr_idx // 현재 여행 계획 ID
+        }),
+        contentType: 'application/json',
+        success: function(response) {
+            console.log('새로운 컬럼이 서버에 저장되었습니다:', response);
+        },
+        error: function(xhr, status, error) {
+            console.error('새로운 컬럼 저장 중 오류가 발생했습니다:', error);
         }
     });
 }
@@ -175,109 +88,253 @@ function autoResize(event) {
     textarea.style.height = `${textarea.scrollHeight}px`; // 내용에 맞게 높이 조정
 }
 
-function dragStart(event) {
-    draggedCard = event.target;
-    event.dataTransfer.setData("text/plain", event.target.textContent);
-    setTimeout(() => {
-        draggedCard.style.display = "none"; // 드래그 시 카드 숨기기
-    }, 0);
+function addDayColumn(col_idx, col_title) {
+	const kanbanBoard = $('#kanban-board');
+
+	const column = $('<div>').addClass('kanban-column').attr('id', `day-${col_idx}`).attr('draggable', 'true');
+	const header = $('<h2>').text(col_title);
+	const itemsContainer = $('<div>').addClass('kanban-items');
+
+	const editButton = $('<button>').addClass('edit-button').text('Edit');
+	editButton.on('click', function() { toggleEditMode(column, editButton); });
+
+	const addButton = $('<button>').addClass('add-card-button').text("+ Add Card");
+	addButton.on('click', function() { addCard(col_idx); });
+
+	column.append(header).append(editButton).append(itemsContainer).append(addButton);
+
+	// 컬럼에 드래그 앤 드롭 이벤트 추가
+	column.on('dragstart', dragStartColumn)
+		.on('dragend', dragEndColumn)
+		.on('dragover', dragOverColumn)
+		.on('drop', dropColumn);
+
+	kanbanBoard.append(column);
 }
 
-function dragEnd(event) {
-    setTimeout(() => {
-        draggedCard.style.display = "block"; // 드래그 끝난 후 카드 보이기
-        draggedCard = null; // 드래그 카드 초기화
-    }, 0);
-}
+function addCard(col_idx, card_idx = null, card_title = "") {
+    const itemsContainer = $(`#day-${col_idx} .kanban-items`);
 
-function dragOver(event) {
-    event.preventDefault();
-    const target = event.target.closest('.kanban-card') || event.target.closest('.kanban-items');
+    const card = $('<div>').addClass('kanban-card').attr('draggable', 'true');
 
-    if (target && draggedCard) {
-        const bounding = target.getBoundingClientRect();
-        const offset = event.clientY - bounding.top;
-
-        if (target.classList.contains('kanban-card')) {
-            if (offset < bounding.height / 2) {
-                target.parentNode.insertBefore(draggedCard, target);
-            } else {
-                target.parentNode.insertBefore(draggedCard, target.nextSibling);
-            }
-        } else if (target.classList.contains('kanban-items')) {
-            target.appendChild(draggedCard);
-        }
+    // 임시 card_idx 생성 (서버로부터 받아온 이후 업데이트될 예정)
+    if (!card_idx) {
+        card_idx = `temp-${Date.now()}`;
     }
-}
+    card.attr('data-id', card_idx);
 
-function drop(event) {
-    event.preventDefault();
-    const target = event.target.closest('.kanban-card') || event.target.closest('.kanban-items');
-
-    if (target && draggedCard) {
-        if (target.classList.contains("kanban-items")) {
-            target.appendChild(draggedCard);
-        } else if (target.classList.contains("kanban-card")) {
-            const bounding = target.getBoundingClientRect();
-            const offset = event.clientY - bounding.top;
-
-            if (offset < bounding.height / 2) {
-                target.parentNode.insertBefore(draggedCard, target);
-            } else {
-                target.parentNode.insertBefore(draggedCard, target.nextSibling);
-            }
-        }
+    if (card_title) {
+        // 이미 존재하는 카드일 경우 (DB에서 불러온 카드)
+        card.text(card_title);
     } else {
-        draggedCard.style.display = "block"; // 드래그 후 카드 보이기
-        draggedCard = null;
+        // 새 카드 생성 시
+        const textarea = $('<textarea>').addClass('card-input').attr('placeholder', 'Enter event title');
+        textarea.on('input', autoResize);
+
+        textarea.on('blur', function () {
+            if (textarea.val().trim() !== '') {
+                card.text(textarea.val()); // 카드에 텍스트 설정
+                // 서버에 카드 저장 요청
+                $.ajax({
+                    url: '/TravelMate/KanbanController',
+                    type: 'POST',
+                    data: JSON.stringify({
+                        action: 'createCard',
+                        card_title: textarea.val(),
+                        col_idx: col_idx
+                    }),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log('카드가 성공적으로 서버에 저장되었습니다:', response);
+                        // 서버로부터 생성된 card_idx를 받아와 업데이트
+                        if (response.card_idx) {
+                            card.attr('data-id', response.card_idx);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('카드를 서버에 저장하는 중 오류가 발생했습니다:', error);
+                    }
+                });
+
+                // blur 이벤트 후 클릭 이벤트 추가
+                card.on('click', function (event) {
+                    if (!textarea.is(":focus")) { // textarea가 포커스를 잃었을 때만 이동
+                        const cardId = card.data('id');
+                        openDetailPage(cardId);
+                    }
+                });
+            } else {
+                card.remove(); // 내용이 없을 경우 카드 삭제
+            }
+        });
+
+        textarea.on('keypress', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Enter 방지
+            }
+        });
+
+        card.append(textarea);
+        textarea.focus();
     }
+
+    itemsContainer.append(card);
+
+    // 드래그 앤 드롭 이벤트 추가
+    card.on('dragstart', dragStart);
+    card.on('dragend', dragEnd);
 }
 
+
+// 특정 카드 클릭 시 새로운 페이지로 이동하는 함수
+function openDetailPage(cardId) {
+	const url = `kb_sub.jsp?id=${cardId}`; // 세부 페이지 URL
+	window.open(url, '_blank'); // 새 탭에서 열기
+}
+
+// 컬럼 순서를 기준으로 Day 번호 업데이트
+function updateDayNumbers() {
+	const columns = document.querySelectorAll('.kanban-column');
+	columns.forEach((column, index) => {
+		const header = column.querySelector('h2');
+		header.textContent = `Day ${index + 1}`;
+	});
+}
+
+// 드래그 앤 드롭 초기화 함수
+function initializeDragAndDrop() {
+	// 카드 요소에 드래그 이벤트 추가
+	document.querySelectorAll('.kanban-card').forEach(card => {
+		card.addEventListener('dragstart', dragStart);
+		card.addEventListener('dragend', dragEnd);
+	});
+
+	// 컬럼 요소에 드래그 이벤트 추가
+	document.querySelectorAll('.kanban-column').forEach(column => {
+		column.addEventListener('dragstart', dragStartColumn);
+		column.addEventListener('dragend', dragEndColumn);
+		column.addEventListener('dragover', dragOverColumn);
+		column.addEventListener('drop', dropColumn);
+	});
+
+	// 카드 컨테이너에 드래그 오버 및 드롭 이벤트 추가
+	document.querySelectorAll('.kanban-items').forEach(itemsContainer => {
+		itemsContainer.addEventListener('dragover', dragOver);
+		itemsContainer.addEventListener('drop', drop);
+	});
+}
+
+// 드래그 시작
+function dragStart(event) {
+	draggedCard = event.currentTarget;
+	event.dataTransfer.effectAllowed = "move";
+	event.dataTransfer.setData("text/plain", event.target.id);
+	draggedCard.style.opacity = "0.5"; // 드래그 중 카드 투명도 조정
+	draggedCard.style.display = ""; // 드래그 시 보이게 설정 (혹시 이전 설정이 남아있을 경우 대비)
+	console.log("dragStart:", draggedCard);
+}
+
+// 드래그 종료
+function dragEnd(event) {
+	if (draggedCard) {
+		draggedCard.style.opacity = "1"; // 드래그가 끝나면 카드 다시 보이기
+		draggedCard.style.display = "block"; // 드래그 후 카드가 사라지지 않도록 display를 block으로 설정
+		console.log("dragEnd - Card restored:", draggedCard);
+		draggedCard = null; // draggedCard 초기화
+	}
+}
+// 드래그 중인 상태
+function dragOver(event) {
+	event.preventDefault();
+	const target = event.target.closest('.kanban-card') || event.target.closest('.kanban-items');
+	console.log("dragOver - Target:", target);
+
+	if (target && draggedCard) {
+		const bounding = target.getBoundingClientRect();
+		const offset = event.clientY - bounding.top;
+
+		if (target.classList.contains('kanban-card')) {
+			if (offset < bounding.height / 2) {
+				target.parentNode.insertBefore(draggedCard, target);
+			} else {
+				target.parentNode.insertBefore(draggedCard, target.nextSibling);
+			}
+		} else if (target.classList.contains('kanban-items')) {
+			target.appendChild(draggedCard);
+		}
+	}
+}
+
+// 드롭 시 동작
+function drop(event) {
+	event.preventDefault();
+	const target = event.target.closest('.kanban-card') || event.target.closest('.kanban-items');
+	console.log("drop - Target:", target);
+
+	if (target && draggedCard) {
+		const bounding = target.getBoundingClientRect();
+		const offset = event.clientY - bounding.top;
+
+		if (target.classList.contains("kanban-card")) {
+			if (offset < bounding.height / 2) {
+				target.parentNode.insertBefore(draggedCard, target);
+			} else {
+				target.parentNode.insertBefore(draggedCard, target.nextSibling);
+			}
+		} else if (target.classList.contains("kanban-items")) {
+			target.appendChild(draggedCard);
+		}
+	}
+
+	// 드롭 후 카드가 다시 보이도록 설정
+	if (draggedCard) {
+		draggedCard.style.opacity = "1";
+		draggedCard.style.display = "block"; // 카드가 사라지지 않도록 display를 block으로 설정
+		console.log("drop - Card restored:", draggedCard);
+	}
+	draggedCard = null; // 드래그가 끝난 후 초기화
+}
+
+// 드래그 시작 시 컬럼 이벤트 수정
 function dragStartColumn(event) {
-    draggedColumn = event.target;
-    event.dataTransfer.effectAllowed = 'move';
-    setTimeout(() => {
-        draggedColumn.style.display = 'none'; // 드래그 시 열 숨기기
-    }, 0);
+	draggedColumn = event.target;
+	if (event.dataTransfer) {
+		event.dataTransfer.effectAllowed = 'move';
+	}
+	setTimeout(() => {
+		if (draggedColumn) {
+			draggedColumn.style.display = 'none'; // 드래그 시 열 숨기기
+		}
+	}, 0);
 }
-
+// 드래그 종료 시 컬럼 이벤트 수정
 function dragEndColumn(event) {
-    setTimeout(() => {
-        draggedColumn.style.display = "block"; // 드래그 후 열 보이기
-        draggedColumn = null;
-        updateDayNumbers(); // 열 번호 업데이트
-    }, 0);
+	setTimeout(() => {
+		if (draggedColumn) {
+			draggedColumn.style.display = "block"; // 드래그 후 열 보이기
+			updateDayNumbers(); // 이동 후 순서 업데이트
+			saveColumnOrder(); // 순서 업데이트 함수 호출
+		}
+		draggedColumn = null;
+	}, 0);
 }
 
 function dragOverColumn(event) {
-    event.preventDefault();
-    const targetColumn = event.target.closest('.kanban-column');
-    if (targetColumn && draggedColumn !== targetColumn) {
-        const bounding = targetColumn.getBoundingClientRect();
-        const offset = event.clientX - bounding.left;
-
-        if (offset > bounding.width / 2) {
-            targetColumn.parentNode.insertBefore(draggedColumn, targetColumn.nextSibling);
-        } else {
-            targetColumn.parentNode.insertBefore(draggedColumn, targetColumn);
-        }
-    }
+	event.preventDefault();
 }
 
-function initializeDragAndDrop() {
-    document.querySelectorAll('.kanban-items').forEach(itemsContainer => {
-        itemsContainer.addEventListener('dragover', dragOver);
-        itemsContainer.addEventListener('drop', drop);
-    });
-
-    document.querySelectorAll('.kanban-column').forEach(column => {
-        column.addEventListener('dragstart', dragStartColumn);
-        column.addEventListener('dragend', dragEndColumn);
-        column.addEventListener('dragover', dragOverColumn);
-    });
+function dropColumn(event) {
+	event.preventDefault();
+	if (draggedColumn) {
+		const targetColumn = event.target.closest('.kanban-column');
+		if (targetColumn) {
+			const bounding = targetColumn.getBoundingClientRect();
+			const offset = event.clientX - bounding.left;
+			if (offset > bounding.width / 2) {
+				targetColumn.parentNode.insertBefore(draggedColumn, targetColumn.nextSibling);
+			} else {
+				targetColumn.parentNode.insertBefore(draggedColumn, targetColumn);
+			}
+		}
+	}
 }
-
-// 페이지가 로드될 때 칸반 보드 초기화
-document.addEventListener("DOMContentLoaded", () => {
-    // 필요한 초기화 코드 추가
-});

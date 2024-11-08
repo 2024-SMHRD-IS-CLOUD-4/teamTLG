@@ -21,5 +21,6 @@
     <mapper resource= "com/tlg/database/TravelPlanMapper.xml"/>
     <mapper resource= "com/tlg/database/BoardMapper.xml"/>
     <mapper resource= "com/tlg/database/VoteMapper.xml"/>
+    <mapper resource= "com/tlg/database/KanbanMapper.xml"/>
   </mappers>
 </configuration>

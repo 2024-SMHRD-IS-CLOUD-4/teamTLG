@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="KanbanMapper">
+ 
+ <resultMap id="KanbanColumnResultMap" type="com.tlg.model.KanbanColumn">
+        <id property="col_idx" column="col_idx"/>
+        <result property="col_title" column="col_title"/>
+        <result property="col_order" column="col_order"/>
+        <result property="tr_idx" column="tr_idx"/>
+        
+        <!-- KanbanColumn과 관련된 KanbanCard 리스트를 매핑 -->
+        <collection property="cards" ofType="com.tlg.model.KanbanCard">
+            <id property="card_idx" column="card_idx"/>
+            <result property="card_title" column="card_title"/>
+            <result property="card_order" column="card_order"/>
+            <result property="col_idx" column="col_idx"/>
+        </collection>
+    </resultMap>
+	<!-- 칸반컬럼과 칸반카드를 조인해서 특정 여행계획에 속한 정보 가져옴 -->
+	<select id="getKanbanData" parameterType="int" resultMap = "KanbanColumnResultMap">
+		SELECT c.col_idx, c.col_title, c.col_order, c.tr_idx,
+               ca.card_idx, ca.card_title, ca.card_order, ca.col_idx
+        FROM KANBAN_COLUMN c
+        LEFT JOIN KANBAN_CARD ca ON c.col_idx = ca.col_idx
+        WHERE c.tr_idx = #{tr_idx}
+        ORDER BY c.col_order, ca.card_order
+    </select>
+</mapper>

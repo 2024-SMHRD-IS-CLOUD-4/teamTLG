@@ -46,27 +46,25 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
 			
 			<div class="content-card3 fade-in-up"><p class="card-text2">나의 여행 계획 List</p>
 			
-				<ul id="travel-plan-list">
-					<%
-					if (member != null) {
-						List<TravelPlan> travelPlans = tpDao.selectPlans(member.getId()); // 사용자의 여행 계획 가져오기
-						if (travelPlans != null && !travelPlans.isEmpty()) {
-							for (TravelPlan plans : travelPlans) {
-					%>
-					<li>
-						<a
-							href="kb_index.jsp?id=<%=plans.getId()%>&travelIndex=<%=plans.getTr_idx()%>">
-								<%=plans.getTr_title()%> - <%=dateFormat.format(plans.getTr_st_dt())%>
-								~ <%=dateFormat.format(plans.getTr_ed_dt())%>
-					</a>
-						</li>
-					<% } %>
-                <% } else if (member != null) { %>
-                    <li>여행 계획이 없습니다.</li>
-                <% } else { %>
-                    <li>로그인 후 여행 계획을 확인할 수 있습니다.</li>
-                <% }}%>
-           		</ul>
+					<ul id="travel-plan-list">
+					    <%
+						    if (member != null) {
+						        List<TravelPlan> travelPlans = tpDao.selectPlans(member.getId()); // 사용자의 여행 계획 가져오기
+						        if (travelPlans != null && !travelPlans.isEmpty()) {
+						            for (TravelPlan plans : travelPlans) {
+						    %>
+						    <li onclick="openKanbanBoard(<%=plans.getTr_idx()%>)">
+						        <a href="javascript:void(0)">
+						            <%=plans.getTr_title()%> - <%=dateFormat.format(plans.getTr_st_dt())%> ~ <%=dateFormat.format(plans.getTr_ed_dt())%>
+						        </a>
+						    </li>
+						    <% } %>
+						    <% } else if (member != null) { %>
+						    <li>여행 계획이 없습니다.</li>
+						    <% } else { %>
+						    <li>로그인 후 여행 계획을 확인할 수 있습니다.</li>
+					    <% }} %>
+					</ul>
         	</div>
 		</div>
 		
@@ -153,5 +151,10 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
             fadeElements.forEach((el) => observer.observe(el));
         });
     </script>
+    <script>
+    function openKanbanBoard(tr_idx) {
+        window.location.href = "kb_index.jsp?tr_idx=" + tr_idx;
+    }
+</script>
 </body>
 </html>

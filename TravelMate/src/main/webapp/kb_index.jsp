@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>여행 일정 칸반 보드</title>
     <link rel="stylesheet" href="assets/css/kb_style.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body>
     <div class="kanban-container">
@@ -25,11 +27,11 @@
         <div id="comments"></div> <!-- 댓글이 표시될 위치 -->
         <div id="pagination" class="pagination"></div>
     </div>
+    <script type="text/javascript">
+    	const tr_idx = "<%= request.getParameter("tr_idx") %>";
+    </script>
 
-    <!-- 로컬 데이터 삭제 버튼 (테스트용) -->
-   <!--  <button id='local'>로컬데이터삭제</button> -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   
     <script src="assets/js/kb_script.js"></script>
 </body>
 </html>
