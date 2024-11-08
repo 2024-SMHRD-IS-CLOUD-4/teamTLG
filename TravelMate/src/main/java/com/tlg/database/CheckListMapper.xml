@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CheckListMapper">
+	<insert id="item" parameterType="String">
+		insert into checklist_info (item) values (#{item})
+	</insert>
+	<select id="getItem" resultType="com.tlg.model.CheckList">
+		select * from checklist_info order by item_idx desc
+	</select>
+	<delete id="delete" parameterType="Integer">
+		delete from checklist_info where item_idx = #{item_idx}
+	</delete>
+</mapper>
