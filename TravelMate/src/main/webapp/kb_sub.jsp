@@ -22,8 +22,8 @@
             <option value="etc">기타</option>
         </select>
     
-        <label for="date">날짜:</label>
-        <input type="date" id="date">
+        <label for="time">시간:</label>
+        <input type="time" id="time">
     
         <label for="location">장소:</label>
         <input type="text" id="location" placeholder="장소 입력" readonly>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommentMapper">
+    <!-- 댓글 출력 -->
+    <select id="getComment" parameterType="int" resultType="com.tlg.model.Comment">
+        SELECT * FROM COMMENT_INFO WHERE tr_idx = #{tr_idx} ORDER BY created_at DESC
+    </select>
+    
+    <!-- 댓글 입력 -->
+    <insert id="PlanComment_input" parameterType="com.tlg.model.Comment">
+    INSERT INTO COMMENT_INFO (cmt_idx, cmt_content, created_at, id, tr_idx)
+    VALUES (#{cmt_idx},#{cmt_content}, SYSDATE, #{id}, #{tr_idx})
+	</insert>
+
+    
+    <!-- 댓글 삭제 -->
+    <delete id="deleteComment" parameterType="int">
+        DELETE FROM COMMENT_INFO WHERE cmt_idx = #{comment_idx}
+    </delete>  
+</mapper>

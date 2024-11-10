@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.tlg.model.KanbanCard;
+import com.tlg.model.KanbanDAO;
 import com.tlg.model.Schedule;
 import com.tlg.model.ScheduleDAO;
 
@@ -17,26 +19,32 @@ public class ScheduleController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ScheduleDAO dao = new ScheduleDAO();
 
+	KanbanDAO kbDao = new KanbanDAO();
+
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	request.setCharacterEncoding("utf-8");
-	
-	// 여행기록
-	
-	int sche_idx = Integer.parseInt(request.getParameter("sche_idx")); 
-	int tr_idx = Integer.parseInt(request.getParameter("tr_idx")); 
-	String sche_type = request.getParameter("sche_type"); 
-	String sche_dt = request.getParameter("sche_dt"); 
-	String sche_tm = request.getParameter("sche_tm"); 
-	String id = (request.getParameter("id")); 
-	int sche_order = Integer.parseInt(request.getParameter("sche_order")); 
-	String vote_result = request.getParameter("vote_result"); 
-	
-	
-	
-	
-	
-	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 'id' 파라미터 가져오기 (카드 ID)
+		String cardIdStr = request.getParameter("id");
+		if (cardIdStr == null || cardIdStr.isEmpty()) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "카드 ID가 필요합니다.");
+			return;
+		}
+
+		try {
+			int cardId = Integer.parseInt(cardIdStr);
+			KanbanCard card = kbDao.getKanbanDataByCardId(cardId); // 카드 정보를 DAO에서 가져오기
+
+			if (card == null) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND, "카드를 찾을 수 없습니다.");
+				return;
+			}
+
+			// JSP 페이지로 카드 정보를 전달
+			request.setAttribute("cardTitle", card.getCard_title());
+			request.getRequestDispatcher("/kb_sub.jsp").forward(request, response);
+		} catch (NumberFormatException e) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "카드 ID 형식이 잘못되었습니다.");
+		}
 	}
 }

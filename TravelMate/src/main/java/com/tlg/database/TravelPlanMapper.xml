@@ -19,16 +19,7 @@
         SELECT * FROM TRAVEL_PLAN_INFO WHERE id = #{id}
     </select>
     
-    <!-- 댓글입력 -->
-    <insert id="PlanComment_input" parameterType = "com.tlg.model.Comment">
-    	INSERT INTO COMMENT_INFO (cmt_idx, c_idx, cmt_content, created_at, cmt_heart, id, tr_idx)
-    	VALUES (#{cmt_idx} , #{c_idx}, #{cmt_content}, #{created_at}, #{cmt_heart}, #{id}, #{tr_idx})
-    </insert>
-    
-    <!-- 댓글출력 -->
-    <select id="PlanComment_output" parameterType="com.tlg.model.Comment" resultType="com.tlg.model.Comment">
-    	SELECT * FROM COMMENT_INFO WHERE tr_idx = #{tr_idx} and id = #{id}
-    </select>
+
     
     <!-- 동행자입력  -->
     <insert id="partner_input" parameterType = "com.tlg.model.Partner">

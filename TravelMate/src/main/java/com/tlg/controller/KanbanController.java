@@ -45,8 +45,9 @@ public class KanbanController extends HttpServlet {
 
 			// JSON 형식으로 데이터를 반환합니다.
 			String json = new Gson().toJson(kanbanData);
-			response.setContentType("application/json");
+			response.setContentType("application/json; charset=UTF-8");
 			response.setCharacterEncoding("UTF-8");
+			request.setCharacterEncoding("UTF-8");
 			response.getWriter().write(json);
 
 		} catch (NumberFormatException e) {
@@ -60,6 +61,7 @@ public class KanbanController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("application/json; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
 
 		StringBuilder sb = new StringBuilder();
 		String line;
@@ -123,9 +125,9 @@ public class KanbanController extends HttpServlet {
 
 			// 카드 추가
 			else if ("createCard".equals(action)) {
-				if (!jsonObject.has("card_title") || !jsonObject.has("col_idx") || !jsonObject.has("card_order")) {
+				if (!jsonObject.has("card_title") || !jsonObject.has("col_idx")) {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-					response.getWriter().write("{\"error\":\"Missing card_title, col_idx, or card_order parameter\"}");
+					response.getWriter().write("{\"error\":\" card_title, col_idx중에 하나 없음\"}");
 					return;
 				}
 
@@ -150,10 +152,48 @@ public class KanbanController extends HttpServlet {
 				jsonResponse.addProperty("card_idx", card_idx);
 				response.getWriter().write(jsonResponse.toString());
 				return;
+			} else if ("deleteColumn".equals(action)) {
+			    if (!jsonObject.has("col_idx")) {
+			        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			        response.getWriter().write("{\"error\":\"Missing col_idx parameter\"}");
+			        return;
+			    }
+
+			    int col_idx = jsonObject.get("col_idx").getAsInt();
+
+			    try {
+			        // 해당 컬럼에 속한 모든 카드를 먼저 삭제
+			        kanbanDAO.deleteCardsByColumn(col_idx);
+			        
+			        // 컬럼 삭제
+			        kanbanDAO.deleteColumn(col_idx);
+
+			        response.setStatus(HttpServletResponse.SC_OK);
+			        response.getWriter().write("{\"message\":\"Column deleted successfully\"}");
+			    } catch (Exception e) {
+			        e.printStackTrace();
+			        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			        response.getWriter().write("{\"error\":\"Failed to delete column\"}");
+			    }
+			    return;
 			}
 
-			// 컬럼 순서 업데이트
-			else if ("updateColumnOrder".equals(action)) {
+
+			// 카드 삭제
+			else if ("deleteCard".equals(action)) {
+				if (!jsonObject.has("card_idx")) {
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					response.getWriter().write("{\"error\":\"Missing card_idx parameter\"}");
+					return;
+				}
+
+				int card_idx = jsonObject.get("card_idx").getAsInt();
+				kanbanDAO.deleteCard(card_idx);
+				response.setStatus(HttpServletResponse.SC_OK);
+				response.getWriter().write("{\"message\":\"Card deleted successfully\"}");
+				return;
+			} else if ("updateColumnOrder".equals(action)) {
+				// 컬럼 순서 업데이트
 				if (!jsonObject.has("columns")) {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 					response.getWriter().write("{\"error\":\"Missing columns parameter\"}");
@@ -184,6 +224,74 @@ public class KanbanController extends HttpServlet {
 
 				response.setStatus(HttpServletResponse.SC_OK);
 				response.getWriter().write("{\"message\":\"Card order updated successfully\"}");
+				return;
+
+			} else if ("updateCardTitle".equals(action)) {
+				if (!jsonObject.has("card_idx") || !jsonObject.has("card_title")) {
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					response.getWriter().write("{\"error\":\"Missing card_idx or card_title parameter\"}");
+					return;
+				}
+
+				String card_idxStr = jsonObject.get("card_idx").getAsString();
+
+				// 임시 카드 ID인 경우 업데이트 요청을 무시하고 로그를 남깁니다.
+				if (card_idxStr != null && card_idxStr.startsWith("temp-")) {
+					System.out.println("임시 카드 ID는 업데이트하지 않습니다: " + card_idxStr);
+					return;
+				}
+
+				int card_idx;
+				try {
+					card_idx = Integer.parseInt(card_idxStr);
+				} catch (NumberFormatException e) {
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					response.getWriter().write("{\"error\":\"Invalid card_idx format\"}");
+					return;
+				}
+
+				String card_title = jsonObject.get("card_title").getAsString();
+
+				KanbanCard card = new KanbanCard();
+				card.setCard_idx(card_idx);
+				card.setCard_title(card_title);
+
+				int result = kanbanDAO.updateCardTitle(card);
+
+				if (result == 0) {
+					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+					response.getWriter().write("{\"error\":\"Failed to update card title\"}");
+					return;
+				}
+
+				response.setStatus(HttpServletResponse.SC_OK);
+				response.getWriter().write("{\"message\":\"Card title updated successfully\"}");
+				return;
+			} 
+			else if ("updateColumnTitle".equals(action)) {
+				if (!jsonObject.has("col_idx") || !jsonObject.has("col_title")) {
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					response.getWriter().write("{\"error\":\"Missing col_idx or col_title parameter\"}");
+					return;
+				}
+
+				int col_idx = jsonObject.get("col_idx").getAsInt();
+				String col_title = jsonObject.get("col_title").getAsString();
+
+				KanbanColumn column = new KanbanColumn();
+				column.setCol_idx(col_idx);
+				column.setCol_title(col_title);
+
+				int result = kanbanDAO.updateColumnTitle(column);
+
+				if (result == 0) {
+					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+					response.getWriter().write("{\"error\":\"Failed to update column title\"}");
+					return;
+				}
+
+				response.setStatus(HttpServletResponse.SC_OK);
+				response.getWriter().write("{\"message\":\"Column title updated successfully\"}");
 				return;
 			}
 
