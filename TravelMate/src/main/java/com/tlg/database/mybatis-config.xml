@@ -17,6 +17,7 @@
   </environments>
   <mappers>
     <mapper resource="com/tlg/database/MemberMapper.xml"/>
+    <mapper resource="com/tlg/database/BoardCommentMapper.xml"/>
     <mapper resource="com/tlg/database/CheckListMapper.xml"/>
     <mapper resource= "com/tlg/database/ScheduleMapper.xml"/>
     <mapper resource= "com/tlg/database/TravelPlanMapper.xml"/>
