@@ -13,20 +13,17 @@
 <link rel="stylesheet" href="assets/css/kb_style.css">
 
 <!-- jQuery 및 jQuery UI 추가 -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
-			<%
-			TravelPlan plan = (TravelPlan) session.getAttribute("plan");
-			%>
 <body>
 
-
-
+	
+	<%
+	TravelPlan plan = (TravelPlan) session.getAttribute("plan");
+	%>
 	<%@ include file="header.jsp"%>
 
-	<main>
 		<div class="kanban-container">
 			<div class="kanban-board" id="kanban-board">
 				<!-- JavaScript에서 컬럼이 생성됩니다. -->
@@ -46,12 +43,11 @@
 			<div id="pagination" class="pagination"></div>
 		</div>
 
-	</main>
-	<script type="text/javascript">
-        const tr_idx = "<%=request.getParameter("tr_idx")%>
-		";
-	</script>
 
+		<script type="text/javascript">
+        const tr_idx = "<%=request.getParameter("tr_idx")%>";
+		</script>
+	
 	<!-- 사용자 스크립트 -->
 	<script src="assets/js/kb_script.js"></script>
 </body>
