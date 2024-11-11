@@ -9,9 +9,6 @@
 </head>
 <body>
     <div class="container">
-    
-    	<a href="airTicket.jsp">항공권 정보 입력</a>
-    
         <h1 id="schedule-title">일정 제목</h1>
     
         <!-- 기존 입력 폼들 -->
@@ -27,6 +24,7 @@
     
         <label for="time">시간</label>
         <input type="time" id="time">
+		<a onclick="openDetailPage()">항공권 정보 입력</a>
     
         <label for="location">장소</label>
         <input type="text" id="location" placeholder="장소 입력">
@@ -47,7 +45,7 @@
             <button onclick="startVoting()">투표 시작</button>
         </div>
     </div>
-
+	
     <script src="assets/js/kb_sub_script.js"></script>
     <script>
 	    document.getElementById('schedule-type').addEventListener('change', function() {
