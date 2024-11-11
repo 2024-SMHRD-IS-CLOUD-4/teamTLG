@@ -18,9 +18,6 @@ TravelPlan plan = (TravelPlan) session.getAttribute("plan");
 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 TravelPlanDAO tpDao = new TravelPlanDAO();
 %>
-
-
-
 <body>
 
 <!-- 	<div class="page-wrapper">
@@ -77,7 +74,6 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
 	<div id="loginModal" class="modal">
 		<div class="modal-content">
 			<button class="close-btn" onclick="closeModal('loginModal')">X</button>
-			<div class="logo-placeholder">로고</div>
 			<form action="LoginController" method="post">
 				<input type="text" name="id" placeholder="아이디를 입력해주세요."> <input
 					type="password" name="pw" placeholder="비밀번호를 입력해주세요.">
