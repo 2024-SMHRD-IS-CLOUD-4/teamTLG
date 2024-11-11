@@ -410,8 +410,9 @@ function toggleEditMode(col_idx) {
 }
 
 function openDetailPage(cardId) {
-	const url = `kb_sub.jsp?id=${cardId}`;
-	window.open(url, '_blank');
+	const url = `kb_sub.jsp?id=${cardId}`; // 세부 페이지 URL
+	const options = "width=800,height=1000,top=100,left=200"
+	window.open(url, '_blank', options); // 새 창에서 열기
 }
 
 function updateDayNumbers() {
