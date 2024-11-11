@@ -12,7 +12,7 @@
         <h1 id="schedule-title">일정 제목</h1>
     
         <!-- 기존 입력 폼들 -->
-        <label for="schedule-type">일정 타입:</label>
+        <label for="schedule-type">일정 타입</label>
         <select id="schedule-type">
             <option value="travel">이동</option>
             <option value="restaurant">맛집</option>
@@ -22,30 +22,30 @@
             <option value="etc">기타</option>
         </select>
     
-        <label for="time">시간:</label>
+        <label for="time">시간</label>
         <input type="time" id="time">
     
-        <label for="location">장소:</label>
-        <input type="text" id="location" placeholder="장소 입력" readonly>
+        <label for="location">장소</label>
+        <input type="text" id="location" placeholder="장소 입력">
     
-        <label for="description">상세 설명:</label>
+        <label for="description">상세 설명</label>
         <textarea id="description" rows="4" placeholder="상세 설명 입력"></textarea>
     
         <button id="save-btn">저장</button>
     
         <!-- 투표 섹션 -->
         <div id="voting-section">
-            <h3>장소 투표</h3>
             <ol id="vote-options">
                 <!-- 사용자 정의 투표 항목이 추가될 자리 -->
             </ol>
+            <button id="complete-vote-btn" style="display: none;" onclick="completeVoting()">투표 완료</button>
+            <button id="cancel-vote-btn" style="display: none;" onclick="cancelVoting()">투표 취소</button>
             <button onclick="addVoteOption()">항목 추가</button>
             <button onclick="startVoting()">투표 시작</button>
-            <button id="complete-vote-btn" style="display: none;" onclick="completeVoting()">투표 완료</button>
         </div>
     </div>
 
-    <script src="kb_sub_script.js"></script>
+    <script src="assets/js/kb_sub_script.js"></script>
     <script>
 	    document.getElementById('schedule-type').addEventListener('change', function() {
 	        const scheduleTitle = document.getElementById('schedule-title');
@@ -79,6 +79,26 @@
 	                break;
 	        }
 	    });
+	    
+	    function saveVoteToDatabase(voteData) {
+	        fetch('VoteController', {
+	            method: 'POST',
+	            headers: {
+	                'Content-Type': 'application/json'
+	            },
+	            body: JSON.stringify(voteData)
+	        })
+	        .then(response => response.text())
+	        .then(data => {
+	            console.log('서버 응답:', data);
+	            alert('투표 데이터가 저장되었습니다!');
+	        })
+	        .catch(error => {
+	            console.error('에러 발생:', error);
+	            alert('데이터 저장 중 문제가 발생했습니다.');
+	        });
+	    }
+
 </script>
 
 </body>
