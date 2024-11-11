@@ -243,3 +243,9 @@ function startVoting() {
 		alert("투표가 종료되었습니다.");
 	}
 }
+
+function openDetailPage() {
+	const url = "airTicket.jsp"; // 세부 페이지 URL
+	const options = "width=350,height=200,top=50,left=1000"
+	window.open(url, '_blank', options); // 새 창에서 열기
+}
