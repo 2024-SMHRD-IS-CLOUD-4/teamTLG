@@ -86,7 +86,7 @@
             <input type="hidden" name="c_idx" value="<%=board.getC_idx() %>">     
             <div class="comment-actions">
                 <%if(member != null) {%>
-                <button class="submit-comment" onclick="submitComment()">댓글 작성</button>
+                <button class="submit-comment" type="button" onclick="submitComment()">댓글 작성</button>
                 <%} else {%>
                 <button class="submit-comment" type="button" onclick="needLogin()">댓글 작성</button>
                 <%} %> 
@@ -101,9 +101,9 @@
                 	</tr>
 		            <%for(int i = 0; i < commentList.size(); i++) {%>
 		            <tr>
-				      	<td><%=member.getNick() %></td>
-				      	<td><%=commentList.get(i).getCmt_content() %></td>
-				      	<td><%=commentList.get(i).getCreated_at() %></td>
+		            	<td><%=member.getNick() %></td>
+		            	<td><%=commentList.get(i).getCmt_content() %></td>
+		            	<td><%=commentList.get(i).getCreated_at() %></td>
 		            <%} %>
 		            </tr>
             	</table>
@@ -122,6 +122,18 @@
     <script type="text/javascript">
     function needLogin() {
     	alert("로그인 후 댓글을 작성하실 수 있습니다!");
+    }
+    function submitComment() {
+        var commentInput = document.getElementById("comment-input").value.trim();
+
+        // `textarea` 값이 비어 있는지 확인
+        if (commentInput === "") {
+            alert("댓글 내용을 입력해 주세요.");
+            return false; // 폼 제출 방지
+        }
+
+        // 내용이 있으면 폼 제출 진행
+        document.querySelector("form").submit();
     }
     </script>
 </body>
