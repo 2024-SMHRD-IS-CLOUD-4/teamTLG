@@ -17,6 +17,10 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
 <body>
+	<div>
+		<a href="http://192.168.219.48:5000">항공권 ocr</a>
+	</div>
+
 	<div class="kanban-container">
 		<div class="kanban-board" id="kanban-board">
 			<!-- JavaScript에서 컬럼이 생성됩니다. -->
