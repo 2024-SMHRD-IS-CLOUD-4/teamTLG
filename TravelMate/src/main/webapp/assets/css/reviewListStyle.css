@@ -1,5 +1,4 @@
-/* 기본 스타일 설정 */
- body {
+body {
     font-family: Arial, sans-serif;
     color: #4a4a4a;
     background-color: white;
@@ -7,6 +6,148 @@
     padding: 0;
     text-align: center;
 }
+
+a { text-decoration:none }
+
+.header-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: beige;
+    max-width: 1200px; /* 최대 넓이 제한 */
+    margin: 0 auto;    /* 화면 가운데 정렬 */
+    border: 2px solid #b08584; /* 두께, 스타일, 색상 */
+    border-radius: 10px; /* 테두리의 모서리를 둥글게 (옵션) */
+}
+
+.header-title {
+    font-size: 4rem;
+    color: #b08584;
+    margin: 0;
+    cursor: pointer;
+}
+
+.header-icons {
+    position: absolute;
+    right: 20px;  /* 오른쪽에 고정 위치 */
+    display: flex;
+    gap: 15px; /* 아이콘 간의 간격 */
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.header-icons span {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header-icons span span {
+    margin-left: 5px;
+    color: #333;
+}
+
+/* Modal 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.modal-content {
+    max-width: 300px; /* 모달 창의 최대 너비 설정 */
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.modal-content h2 {
+    font-size: 20px;
+    color: #d36d6d;
+    margin-bottom: 20px;
+}
+
+.modal-content input[type="text"],
+        .modal-content input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .modal-content .gender-check {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            margin: 8px 0;
+        }
+        .modal-content .email-container {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .modal-content select {
+            flex: 0.5; /* 셀렉트 박스의 크기 조정 */
+            padding: 8px;
+        }
+        .modal-content .register-btn {
+            padding: 10px;
+            width: 100%;
+            background-color: #dcdcdc;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .modal-content .google-btn {
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+            display: block;
+        }
+        .modal-content .register-link {
+            margin-top: 5px;
+            cursor: pointer;
+            text-decoration: underline;
+            color: #666;
+        }
+        .modal-content .register-link:hover {
+            cursor: pointer; /* 커서 변경 */
+            color: #333; /* 색상 변경으로 시각적 효과 추가 */
+        }
+        .close-btn {
+            background-color: #ccc;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+/* 기본 스타일 설정 */
+/*  body {
+    font-family: Arial, sans-serif;
+    color: #4a4a4a;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+} */
 
 /* 네비게이션 스타일 */
 nav ul {
@@ -114,7 +255,6 @@ nav ul li a.active {
 
 .recent-posts h2 {
     font-size: 1.5rem;
-    margin-bottom: 10px;
 }
 
 .recent-posts table {
@@ -136,7 +276,8 @@ nav ul li a.active {
 
 .recent-posts button {
     margin-top: 10px;
-    padding: 10px 20px;
+
+    height: 30px;
     cursor: pointer;
     background-color: #b08584;
     color: #fff;
@@ -144,6 +285,18 @@ nav ul li a.active {
     border-radius: 5px;
 }
 
+.body button glass {
+	margin-top: 10px;
+    width: 50px;
+    height: 25px;
+    cursor: pointer;
+    background-color: #b08584;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+ 
 footer {
     margin-top: 20px;
 }
@@ -162,5 +315,3 @@ footer button {
     border-radius: 5px;
     cursor: pointer;
 }
-
-

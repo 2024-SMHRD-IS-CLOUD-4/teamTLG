@@ -20,9 +20,8 @@ main {
 
 /* 가운데 컨텐츠 영역 스타일 */
 .content-wrapper {
-    background-color: #f5f5dc; /* 베이지색 */
+    background-color: white; 
     width: 65%; /* 화면에서 가운데 영역 너비 (필요에 따라 조정) */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
     padding: 20px; /* 안쪽 여백 */
     border-radius: 10px; /* 둥근 모서리 */
 }
@@ -45,7 +44,7 @@ main {
 .plan-button {
     background-color: #D1FAFE; 
     color: #333; /* 글자색 */
-    padding: 20px 95px; /* 안쪽 여백 */
+    padding: 20px 100px; /* 안쪽 여백 */
     border: 2px solid #b08584; /* 두께, 스타일, 색상 */
     border-radius: 10px; /* 테두리의 모서리를 둥글게 (옵션) */
     font-size: 16px; /* 글자 크기 */
@@ -55,8 +54,8 @@ main {
     transition: all 0.3s ease; /* 부드러운 전환 효과 */
     
     position: fixed;
-    right: 19%;
-    bottom: 28.1%;
+    right: 17.2%;
+    bottom: 32.6%;
 }
 
 /* 마우스 올렸을 때 역동적인 효과 */
@@ -143,15 +142,17 @@ main {
     padding: 0; /* 여백 제거 */
     margin-top: 30px; /* 리스트와 제목 사이 여백 */
     max-height: 270px; /* 리스트의 최대 높이 설정 */
-    border: 1px solid #b08584; /* 두께, 스타일, 색상 */
+/*     border: 1px solid #b08584; 두께, 스타일, 색상 */
     border-radius: 10px; /* 테두리의 모서리를 둥글게 (옵션) */
     overflow-y: auto; /* 세로 스크롤 추가 */
+    display: flex; /* 플렉스박스 레이아웃 */
+    flex-direction: column; /* 세로 방향으로 정렬 */
 }
 
 #travel-plan-list li {
-    margin-bottom: 10px; /* 각 리스트 항목 사이 간격 */
-    padding: 8px;
-    background-color: #D1FAFE; /* 각 항목의 배경 */
+/*     margin-bottom: 10px; 각 리스트 항목 사이 간격 */
+    padding: 12px;
+/*     background-color: #D1FAFE; 각 항목의 배경 */
     border: 1px solid #ddd; /* 각 항목의 테두리 */
     border-radius: 5px; /* 항목의 모서리를 둥글게 */
 }
@@ -367,7 +368,7 @@ main {
 #planFormModal input[type="text"],
 #planFormModal input[type="date"],
 #planFormModal textarea {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ddd;
@@ -375,7 +376,6 @@ main {
 }
 
 #planFormModal button {
-    width: 100%;
     padding: 10px;
     background-color: #4caf50;
     color: white;
