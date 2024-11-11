@@ -19,8 +19,8 @@
 		</collection>
 	</resultMap>
 	<!-- 칸반컬럼과 칸반카드를 조인해서 특정 여행계획에 속한 정보 가져옴 -->
-	<select id="getKanbanData" parameterType="int"
-		resultMap="KanbanColumnResultMap">
+	
+	<select id="getKanbanData" parameterType="int" resultMap="KanbanColumnResultMap">
 		SELECT c.col_idx, c.col_title, c.col_order, c.tr_idx,
 		ca.card_idx, ca.card_title, ca.card_order, ca.col_idx
 		FROM
@@ -81,7 +81,7 @@
 		WHERE card_idx = #{card_idx}
 	</update>
 
-	<delete id="deleteCardsByColumn" parameterType="int">
+	<delete id="deleteCardsByColumnId" parameterType="int">
 	    DELETE FROM KANBAN_CARD WHERE col_idx = #{col_idx}
 	</delete>
 	
@@ -97,20 +97,10 @@
 		WHERE card_idx = #{card_idx}
 	</delete>
 
-
-	<!-- 카드오더중에 가장 큰 값을 가져옴 <select id="getMaxCardOrder" parameterType="int" 
-		resultType="int"> SELECT COALESCE(MAX(card_order), 0) FROM KANBAN_CARD WHERE 
-		col_idx = #{col_idx} </select> -->
-
-
-	<!-- 컬럼오더중에 가장 큰 값을 가져옴 <select id="getMaxColOrder" parameterType="int" 
-		resultType="int"> SELECT COALESCE(MAX(col_order), 0) FROM KANBAN_COLUMN WHERE 
-		tr_idx = #{tr_idx} </select> -->
-
-
-
-
-
+    <!-- 카드 ID로 카드 정보를 가져오기 -->
+    <select id="getCardById" parameterType="int" resultType="com.tlg.model.KanbanCard">
+        SELECT * FROM KANBAN_CARD WHERE card_idx = #{cardId}
+    </select>
 
 
 

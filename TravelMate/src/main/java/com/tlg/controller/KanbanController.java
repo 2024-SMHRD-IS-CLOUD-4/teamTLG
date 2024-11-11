@@ -1,7 +1,7 @@
-// KanbanController.java
 package com.tlg.controller;
 
 import com.tlg.model.KanbanDAO;
+import com.tlg.model.ScheduleDAO;
 import com.tlg.model.KanbanCard;
 import com.tlg.model.KanbanColumn;
 import com.google.gson.Gson;
@@ -23,6 +23,7 @@ import java.util.List;
 public class KanbanController extends HttpServlet {
 	private static final long serialVersionUID = 2785127315253161912L;
 	KanbanDAO kanbanDAO = new KanbanDAO();
+	ScheduleDAO scDao = new ScheduleDAO();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -153,31 +154,33 @@ public class KanbanController extends HttpServlet {
 				response.getWriter().write(jsonResponse.toString());
 				return;
 			} else if ("deleteColumn".equals(action)) {
-			    if (!jsonObject.has("col_idx")) {
-			        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			        response.getWriter().write("{\"error\":\"Missing col_idx parameter\"}");
-			        return;
-			    }
+				if (!jsonObject.has("col_idx")) {
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					response.getWriter().write("{\"error\":\"Missing col_idx parameter\"}");
+					return;
+				}
 
-			    int col_idx = jsonObject.get("col_idx").getAsInt();
+				int col_idx = jsonObject.get("col_idx").getAsInt();
 
-			    try {
-			        // 해당 컬럼에 속한 모든 카드를 먼저 삭제
-			        kanbanDAO.deleteCardsByColumn(col_idx);
-			        
-			        // 컬럼 삭제
-			        kanbanDAO.deleteColumn(col_idx);
+				try {
+					// 1. 해당 컬럼에 속한 카드들에 연결된 모든 스케줄 삭제
+					scDao.deleteSchedulesByColumnId(col_idx);
 
-			        response.setStatus(HttpServletResponse.SC_OK);
-			        response.getWriter().write("{\"message\":\"Column deleted successfully\"}");
-			    } catch (Exception e) {
-			        e.printStackTrace();
-			        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			        response.getWriter().write("{\"error\":\"Failed to delete column\"}");
-			    }
-			    return;
+					// 2. 해당 컬럼에 속한 모든 카드 삭제
+					kanbanDAO.deleteCardsByColumnId(col_idx);
+
+					// 3. 컬럼 삭제
+					kanbanDAO.deleteColumn(col_idx);
+
+					response.setStatus(HttpServletResponse.SC_OK);
+					response.getWriter().write("{\"message\":\"Column and related data deleted successfully\"}");
+				} catch (Exception e) {
+					e.printStackTrace();
+					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+					response.getWriter().write("{\"error\":\"Failed to delete column and related data\"}");
+				}
+				return;
 			}
-
 
 			// 카드 삭제
 			else if ("deleteCard".equals(action)) {
@@ -188,10 +191,28 @@ public class KanbanController extends HttpServlet {
 				}
 
 				int card_idx = jsonObject.get("card_idx").getAsInt();
-				kanbanDAO.deleteCard(card_idx);
-				response.setStatus(HttpServletResponse.SC_OK);
-				response.getWriter().write("{\"message\":\"Card deleted successfully\"}");
+
+				try {
+					// 1. 해당 카드에 연결된 스케줄 삭제
+					int deletedSchedulesCount = scDao.deleteSchedulesByCardId(card_idx);
+					System.out.println("삭제된 스케줄 수: " + deletedSchedulesCount);
+
+					// 2. 카드 삭제
+					int deletedCardCount = kanbanDAO.deleteCard(card_idx);
+					if (deletedCardCount > 0) {
+						response.setStatus(HttpServletResponse.SC_OK);
+						response.getWriter().write("{\"message\":\"Card and related schedules deleted successfully\"}");
+					} else {
+						response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+						response.getWriter().write("{\"error\":\"Failed to delete card\"}");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+					response.getWriter().write("{\"error\":\"An error occurred while deleting card and schedules\"}");
+				}
 				return;
+
 			} else if ("updateColumnOrder".equals(action)) {
 				// 컬럼 순서 업데이트
 				if (!jsonObject.has("columns")) {
@@ -267,8 +288,7 @@ public class KanbanController extends HttpServlet {
 				response.setStatus(HttpServletResponse.SC_OK);
 				response.getWriter().write("{\"message\":\"Card title updated successfully\"}");
 				return;
-			} 
-			else if ("updateColumnTitle".equals(action)) {
+			} else if ("updateColumnTitle".equals(action)) {
 				if (!jsonObject.has("col_idx") || !jsonObject.has("col_title")) {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 					response.getWriter().write("{\"error\":\"Missing col_idx or col_title parameter\"}");

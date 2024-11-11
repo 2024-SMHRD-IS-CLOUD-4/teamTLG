@@ -1,40 +1,64 @@
 let dayCount = 0;
 let cardCounter = 0;
 let latestColIdx = null;
-
+let isEditing = false;
 
 
 $(document).ready(function() {
-	const urlParams = new URLSearchParams(window.location.search);
-	const tr_idx = urlParams.get('tr_idx');
+    const urlParams = new URLSearchParams(window.location.search);
+    const tr_idx = urlParams.get('tr_idx');
 
-	if (tr_idx) {
-		loadKanbanBoard(tr_idx); // Kanban 보드 로드
-		loadComments(tr_idx); // 댓글 로드
-	} else {
-		console.error('tr_idx가 제공되지 않았습니다.');
-	}
+    if (tr_idx) {
+        loadKanbanBoard(tr_idx); // Kanban 보드 로드
+        loadComments(tr_idx); // 댓글 로드
+    } else {
+        console.error('tr_idx가 제공되지 않았습니다.');
+    }
 
-	// 기존의 add-card-button에 대한 클릭 이벤트 바인딩
-	$(document).on('click', '.add-card-button', function() {
-		const col_idx = $(this).closest('.kanban-column').attr('id').replace('Day', '');
-		addNewCard(col_idx);
-	});
+    // 기존의 add-card-button에 대한 클릭 이벤트 바인딩
+    $(document).on('click', '.add-card-button', function() {
+        const col_idx = $(this).closest('.kanban-column').attr('id').replace('Day', '');
+        addNewCard(col_idx);
+    });
 
-	// + 버튼 클릭 시 새로운 컬럼 추가
-	$('.add-day-button').off('click').on('click', addNewDay);
+    // + 버튼 클릭 시 새로운 컬럼 추가
+    $('.add-day-button').off('click').on('click', addNewDay);
 
-	// 댓글 추가 버튼 클릭 시 댓글 추가 요청
-	$('#add-comment').on('click', function() {
-		const commentContent = $('#comment-content').val().trim(); // 댓글 입력 내용
-		if (commentContent) {
-			addComment(tr_idx, commentContent); // 댓글 추가 함수 호출
-		} else {
-			alert("댓글을 입력해 주세요.");
-		}
-	});
+    // 컬럼을 클릭할 때 col_idx를 가져오는 이벤트 추가
+    $(document).on('click', '.kanban-column', function() {
+        const colIdx = $(this).data('col-idx'); // data-col-idx로부터 col_idx 가져오기
+        console.log("클릭한 컬럼의 col_idx:", colIdx);
+    });
+
+    // 카드 클릭 이벤트 핸들러 추가
+    $(document).on('click', '.kanban-card', function(event) {
+        const column = $(this).closest('.kanban-column');
+        const colIdx = column.data('col-idx');
+        const cardId = $(this).data('id');
+
+        // Edit 모드일 때는 클릭 방지
+        if (isEditing) {
+            console.log("Edit 모드에서는 카드 클릭이 차단됩니다.");
+            event.stopPropagation(); // 클릭 이벤트 중지
+            return;
+        }
+
+        console.log("Card clicked, isEditing:", isEditing); // 카드 클릭 시 isEditing 상태 확인
+
+        // Edit 모드가 아닐 때만 상세 페이지로 이동
+        openDetailPage(cardId, colIdx);
+    });
+
+    // 댓글 추가 버튼 클릭 시 댓글 추가 요청
+    $('#add-comment').on('click', function() {
+        const commentContent = $('#comment-content').val().trim(); // 댓글 입력 내용
+        if (commentContent) {
+            addComment(tr_idx, commentContent); // 댓글 추가 함수 호출
+        } else {
+            alert("댓글을 입력해 주세요.");
+        }
+    });
 });
-
 
 
 function loadKanbanBoard(tr_idx) {
@@ -64,6 +88,7 @@ function loadKanbanBoard(tr_idx) {
 		}
 	});
 }
+
 
 
 // 컬럼 타이틀 업데이트 함수
@@ -96,7 +121,7 @@ function updateColumnTitle(col_idx, element) {
 function addDayColumn(col_idx, col_title) {
 	const kanbanBoard = $('#kanban-board');
 	const column = $(`
-        <div class="kanban-column" id="Day${col_idx}">
+        <div class="kanban-column" id="Day${col_idx}" data-col-idx="${col_idx}">
             <h2 contenteditable="true" onblur="updateColumnTitle(${col_idx}, this)">${col_title}</h2>
             <button class="edit-button" onclick="toggleEditMode(${col_idx})">Edit</button>
             <button class="delete-column-button">Delete Column</button>
@@ -115,6 +140,7 @@ function addDayColumn(col_idx, col_title) {
 
 	kanbanBoard.append(column);
 }
+
 
 // 컬럼 삭제 함수
 function deleteColumn(col_idx) {
@@ -140,7 +166,6 @@ function deleteColumn(col_idx) {
 		}
 	});
 }
-
 
 function addNewCard(col_idx) {
 	const card_title = prompt("카드 제목을 입력하세요:");
@@ -175,70 +200,88 @@ function addNewCard(col_idx) {
 
 // 카드 타이틀 업데이트 함수
 function updateCardTitle(card_idx, newTitle) {
-	if (!newTitle || typeof newTitle !== 'string') {
-		console.error("업데이트할 카드 제목이 유효하지 않습니다:", newTitle);
-		return;
-	}
+    if (!newTitle || typeof newTitle !== 'string') {
+        console.error("업데이트할 카드 제목이 유효하지 않습니다:", newTitle);
+        return;
+    }
 
-	// 임시 카드 ID인 경우 서버로 전송하지 않습니다.
-	if (typeof card_idx === 'string' && card_idx.startsWith('temp-')) {
-		console.log("임시 카드 ID이므로 서버에 전송하지 않습니다:", card_idx);
-		return;
-	}
+    // 임시 카드 ID인 경우 서버로 전송하지 않습니다.
+    if (typeof card_idx === 'string' && card_idx.startsWith('temp-')) {
+        console.log("임시 카드 ID이므로 서버에 전송하지 않습니다:", card_idx);
+        return;
+    }
 
-	$.ajax({
-		url: '/TravelMate/KanbanController',
-		type: 'POST',
-		contentType: 'application/json; charset=UTF-8',
-		data: JSON.stringify({
-			action: 'updateCardTitle',
-			card_idx: card_idx,
-			card_title: newTitle.trim()
-		}),
-		success: function(response) {
-			console.log('카드 제목이 성공적으로 업데이트되었습니다:', response);
-		},
-		error: function(xhr, status, error) {
-			console.error('카드 제목을 업데이트하는 중 오류가 발생했습니다:', error);
-		}
-	});
+    // "Delete" 텍스트가 포함되지 않도록 처리
+    const sanitizedTitle = newTitle.replace('Delete', '').trim(); 
+
+    $.ajax({
+        url: '/TravelMate/KanbanController',
+        type: 'POST',
+        contentType: 'application/json; charset=UTF-8',
+        data: JSON.stringify({
+            action: 'updateCardTitle',
+            card_idx: card_idx,
+            card_title: sanitizedTitle
+        }),
+        success: function(response) {
+            console.log('카드 제목이 성공적으로 업데이트되었습니다:', response);
+        },
+        error: function(xhr, status, error) {
+            console.error('카드 제목을 업데이트하는 중 오류가 발생했습니다:', error);
+        }
+    });
 }
 
 function addCard(col_idx, card_idx = null, card_title = "", card_order = null) {
-	if (!card_title) return;
+    if (!card_title) return;
 
-	const card = $('<div>').addClass('kanban-card')
-		.attr('data-id', card_idx || `temp-${Date.now()}`)
-		.attr('data-order', card_order)
-		.text(card_title);
+    // 카드 요소 생성
+    const card = $('<div>').addClass('kanban-card')
+        .attr('data-id', card_idx || `temp-${Date.now()}`)
+        .attr('data-order', card_order);
 
-	// 삭제 버튼 추가
-	const deleteButton = $('<button>').addClass('delete-card-button').text('Delete');
-	deleteButton.on('click', function(event) {
-		event.stopPropagation(); // 카드 클릭 이벤트와 충돌하지 않도록 클릭 이벤트 중지
-		const confirmed = confirm('이 카드를 삭제하시겠습니까?');
-		if (confirmed) {
-			deleteCard($(this).closest('.kanban-card').data('id'));
-		}
-	});
+    // 카드 제목 요소 추가 (여기서만 contenteditable을 적용)
+    const cardTitle = $('<div>').addClass('card-title')
+        .text(card_title)
+        .attr('contenteditable', 'true'); // 제목만 수정 가능하게 함
 
-	// 카드 클릭 이벤트 처리
-	card.on('click', function() {
-		const column = $(this).closest('.kanban-column');
-		const isEditing = column.data('editing');
+    // 삭제 버튼 추가 (수정 불가능하도록)
+    const deleteButton = $('<button>').addClass('delete-card-button').text('Delete')
+        .attr('contenteditable', 'false'); // 버튼은 수정 불가능하게 함
 
-		if (isEditing) {
-			// Edit 모드일 때 제목 수정
-			$(this).attr('contenteditable', 'true').focus();
-		} else {
-			// Edit 모드가 아닐 때 상세 페이지로 이동
-			openDetailPage($(this).data('id'));
-		}
-	});
+    deleteButton.on('click', function(event) {
+        event.stopPropagation(); // 카드 클릭 이벤트와 충돌하지 않도록 클릭 이벤트 중지
+        const confirmed = confirm('이 카드를 삭제하시겠습니까?');
+        if (confirmed) {
+            deleteCard($(this).closest('.kanban-card').data('id'));
+        }
+    });
 
-	card.append(deleteButton);
-	$(`#cards-${col_idx}`).append(card);
+    // 카드 클릭 이벤트 처리
+    card.on('click', function(event) {
+        const column = $(this).closest('.kanban-column');
+        const isEditing = column.data('editing'); // Edit 모드 확인
+        console.log("Card clicked, isEditing:", isEditing); // 디버깅 로그
+
+        if (isEditing) {
+            // Edit 모드일 때만 제목 수정 가능
+            cardTitle.attr('contenteditable', 'true').focus();
+            event.stopPropagation(); // 다른 클릭 이벤트와 충돌 방지
+        } else {
+            // Edit 모드가 아닐 때만 상세 페이지로 이동
+            openDetailPage($(this).data('id'), col_idx);
+        }
+    });
+
+    // 카드에 제목과 삭제 버튼 추가
+    card.append(cardTitle).append(deleteButton);
+
+    // 카드 추가
+    $(`#cards-${col_idx}`).append(card);
 }
+
+
+
 
 // 카드 삭제 함수
 function deleteCard(card_idx) {
@@ -264,7 +307,6 @@ function deleteCard(card_idx) {
 		}
 	});
 }
-
 
 
 
@@ -295,6 +337,7 @@ function addNewDay() {
 		}
 	});
 }
+
 
 
 function initializeSortable() {
@@ -365,54 +408,52 @@ function saveCardOrder(cards) {
 		}
 	});
 }
-
 // Edit 모드 토글 기능
 function toggleEditMode(col_idx) {
-	const column = $(`#Day${col_idx}`);
-	const isEditing = column.data('editing') || false;
+    const column = $(`#Day${col_idx}`);
 
-	// 각 카드의 제목을 편집 가능하도록 설정
-	column.find('.kanban-card').each(function() {
-		const card = $(this);
-		const titleText = card.text();
+    // Edit 모드 상태 토글
+    isEditing = !isEditing;
 
-		if (!isEditing) {
-			// Edit 모드 활성화
-			card.attr('contenteditable', 'true').focus();
-		} else {
-			// Save 모드 활성화 (Edit 모드 비활성화)
-			const newTitle = card.text().trim();
-			card.attr('contenteditable', 'false');
+    console.log("Edit 모드 상태:", isEditing);
 
-			// 제목이 변경된 경우 서버에 업데이트 요청
-			if (newTitle && card.data('id')) {
-				updateCardTitle(card.data('id'), newTitle);
-			}
-		}
-	});
+    // 각 카드의 제목을 편집 가능하도록 설정
+    column.find('.kanban-card').each(function() {
+        const card = $(this);
+        if (isEditing) {
+            // Edit 모드 활성화
+            card.attr('contenteditable', 'true').focus();
+        } else {
+            // Save 모드 활성화 (Edit 모드 비활성화)
+            const newTitle = card.text().trim();
+            card.attr('contenteditable', 'false');
+            if (newTitle && card.data('id')) {
+                updateCardTitle(card.data('id'), newTitle);
+            }
+        }
+    });
 
-	// 컬럼 제목도 편집 가능하도록 설정
-	const columnTitle = column.find('h2');
-	if (!isEditing) {
-		columnTitle.attr('contenteditable', 'true').focus();
-	} else {
-		const newColTitle = columnTitle.text().trim();
-		columnTitle.attr('contenteditable', 'false');
+    // 컬럼 제목도 편집 가능하도록 설정
+    const columnTitle = column.find('h2');
+    if (isEditing) {
+        columnTitle.attr('contenteditable', 'true').focus();
+    } else {
+        const newColTitle = columnTitle.text().trim();
+        columnTitle.attr('contenteditable', 'false');
+        if (newColTitle) {
+            updateColumnTitle(col_idx, columnTitle[0]);
+        }
+    }
 
-		if (newColTitle) {
-			updateColumnTitle(col_idx, columnTitle[0]);
-		}
-	}
-
-	// Edit 모드 상태 토글
-	column.data('editing', !isEditing);
-	column.find('.edit-button').text(isEditing ? 'Edit' : 'Save');
+    // Edit 모드 상태 토글
+    column.data('editing', isEditing);
+    column.find('.edit-button').text(isEditing ? 'Save' : 'Edit');
 }
 
-function openDetailPage(cardId) {
-	const url = `kb_sub.jsp?id=${cardId}`; // 세부 페이지 URL
-	const options = "width=800,height=1000,top=100,left=200"
-	window.open(url, '_blank', options); // 새 창에서 열기
+function openDetailPage(cardId, col_idx) {
+	const url = `kb_sub.jsp?id=${cardId}&col_idx=${col_idx}`;
+	const options = "width=800,height=1000,top=100,left=200";
+	window.open(url, '_blank', options);
 }
 
 function updateDayNumbers() {
