@@ -24,7 +24,7 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
 	<main class="content-wrapper">
 	<%@ include file="header.jsp"%>
 
-	<main>
+
 		<div class="content">
 			<!-- <a href="#" class="content-card fade-in-up"
 				style="background-image: url('img/tokyoView.png');">
@@ -128,7 +128,7 @@ TravelPlanDAO tpDao = new TravelPlanDAO();
     </div>
    <!--  <div id="toastMessage">여행 계획이 저장되었습니다.</div> -->
 </div>
-</main>
+
 </div>
 
 	<!-- JavaScript 파일 연결 -->
