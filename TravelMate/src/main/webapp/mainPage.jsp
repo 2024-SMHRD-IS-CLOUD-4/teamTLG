@@ -18,9 +18,6 @@ TravelPlan plan = (TravelPlan) session.getAttribute("plan");
 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 TravelPlanDAO tpDao = new TravelPlanDAO();
 %>
-
-
-
 <body>
 
 <!-- 	<div class="page-wrapper">

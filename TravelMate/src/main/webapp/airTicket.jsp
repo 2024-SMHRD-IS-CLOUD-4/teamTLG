@@ -18,10 +18,10 @@
                 <input type="hidden" name="id" value="<%=member.getId()%>">
             </div>
             <div>
-                img:<input type="file" name="ocr_img">
+                img:<input type="file" name="ocr_img" required>
             </div>
             <div>
-                date:<input type="date" name="created_at">
+                date:<input type="date" name="created_at" required>
             </div>
             <input type="submit" value="제출">
         </fieldset>
