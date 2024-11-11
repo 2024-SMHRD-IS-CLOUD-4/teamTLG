@@ -1,3 +1,4 @@
+<%@page import="com.tlg.model.TravelPlan"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -16,8 +17,13 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
-<body>
 
+<%
+   TravelPlan plan = (TravelPlan) session.getAttribute("plan");
+%>
+
+<body>
+   <%@ include file="header.jsp"%>
 	<div class="kanban-container">
 		<div class="kanban-board" id="kanban-board">
 			<!-- JavaScript에서 컬럼이 생성됩니다. -->

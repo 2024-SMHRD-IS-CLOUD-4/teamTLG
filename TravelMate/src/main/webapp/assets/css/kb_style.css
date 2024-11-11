@@ -14,7 +14,7 @@ body {
 
 .kanban-board {
     display: flex;
-    gap: 20px;
+    gap: 53px;
     align-items: stretch;
     flex-wrap: wrap;
     width: 100%;
@@ -142,7 +142,6 @@ button:hover {
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     margin-top: 200px; /* 마지막 컬럼의 중앙부와 맞추기 위한 위치 조정 */
-    margin-left: 30px;
 }
 
 .add-day-button:hover {
