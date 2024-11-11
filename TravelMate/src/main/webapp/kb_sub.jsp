@@ -9,6 +9,9 @@
 </head>
 <body>
     <div class="container">
+    
+    	<a href="airTicket.jsp">항공권 정보 입력</a>
+    
         <h1 id="schedule-title">일정 제목</h1>
     
         <!-- 기존 입력 폼들 -->
