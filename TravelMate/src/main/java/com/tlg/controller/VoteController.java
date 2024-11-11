@@ -1,53 +1,57 @@
 package com.tlg.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;  // Gson 라이브러리를 사용하는 경우
 import com.tlg.model.Vote;
-import com.tlg.model.VoteDAO;
 
 @WebServlet("/VoteController")
 public class VoteController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/plain;charset=UTF-8");
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // JSON 데이터 읽기
+        BufferedReader reader = request.getReader();
+        StringBuilder jsonData = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            jsonData.append(line);
+        }
 
-		
-		// 투표 입력
-	request.setCharacterEncoding("utf-8");
-	
-	String id = request.getParameter("id");
-	int vote_idx = Integer.parseInt(request.getParameter("vote_idx"));
-	int sche_idx = Integer.parseInt(request.getParameter("sche_idx"));
-	int vote_score = Integer.parseInt(request.getParameter("vote_score"));
-	String create_at = request.getParameter("create_at");
-	String vote_result = request.getParameter("vote_result");
-	int tr_idx = Integer.parseInt(request.getParameter("tr_idx"));
-	String[] vote_choice = request.getParameterValues("vote_choice");
-	
-	Vote inputVote = new Vote(vote_idx, sche_idx, vote_score, create_at, id, vote_result, tr_idx);
-	
-	VoteDAO vdao = new VoteDAO();
-	
-	int result = vdao.insertVote(inputVote);
-	
-	if(result>0) {
-		HttpSession session = request.getSession();
-		session.setAttribute("vote_result",inputVote);
-		response.sendRedirect("kb_sub.jsp");
-	}
-	
-	// 투표 출력
-	// 필요한 정보 : 투표항목만 보여주면 되나? 결과는 끝나고 보여줄건데? 일단 결과도 보여준다고해야하나? ㅇㅋ 그럼 결과보여주고 나중에 어차피 비동기통신으로 바꿔야댐
-		// 그럼 투표항목과 투표결과를 보여줘야함! vote_choice vote_result 보여줘야함!
-	
-	
-	
-	}
+        // JSON 데이터를 Vote 객체로 변환
+        Gson gson = new Gson();
+        Vote inputVote = gson.fromJson(jsonData.toString(), Vote.class);
 
+        // DB 연결 및 데이터 삽입
+        try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "username", "password");
+             PreparedStatement pstmt = conn.prepareStatement(
+                 "INSERT INTO VOTE_CHOICE (CHOICE_IDX, TR_IDX, SCHE_IDX, VOTE_CONT, VOTE_SCORE) VALUES (?, ?, ?, ?, ?)")) {
+
+            pstmt.setInt(1, inputVote.getChoiceIdx());
+            pstmt.setInt(2, inputVote.getTrIdx());
+            pstmt.setInt(3, inputVote.getScheIdx());
+            pstmt.setString(4, inputVote.getVoteCont());
+            pstmt.setInt(5, inputVote.getVoteScore());
+
+            int rows = pstmt.executeUpdate();
+            response.getWriter().write(rows > 0 ? "데이터 저장 성공" : "데이터 저장 실패");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.getWriter().write("데이터베이스 오류 발생: " + e.getMessage());
+        }
+    }
 }
+

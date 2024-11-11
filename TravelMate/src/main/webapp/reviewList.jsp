@@ -16,10 +16,67 @@
 	BoardDAO dao = new BoardDAO();
 	
 	List<TmBoard> board = dao.getBoard();
+	
+	TmMember member = (TmMember) session.getAttribute("member");
 %>
 <body>
-    
-    <%@ include file="header.jsp" %>
+
+	<header class="header-container">
+        <h1 onclick="goToMain()" class="header-title">Travel Mate</h1>
+        <nav class="header-icons">
+            <%
+            if (member == null) {
+            %>
+            <span onclick="checkLoginStatus()">로그인</span>
+            <%
+            } else {
+            %>
+            <span onclick="openModal('alarmModal')">🔔<span>알람</span></span>
+            <span>👤<a href="myPageIndex.jsp"><span>my page</span></a></span>
+            <span><a id="logout" href="LogoutController">로그아웃</a></span>
+            <span onclick="openCheckList()">나만의 여행가방</span>
+            <%
+            }
+            %>
+        </nav>
+    </header>
+	
+	<!-- 로그인 모달 -->
+	<div id="loginModal" class="modal">
+		<div class="modal-content">
+			<button class="close-btn" onclick="closeModal('loginModal')">X</button>
+			<div class="logo-placeholder">로고</div>
+			<form action="LoginController" method="post">
+				<input type="text" name="id" placeholder="아이디를 입력해주세요."> <input
+					type="password" name="pw" placeholder="비밀번호를 입력해주세요.">
+				<button>로그인</button>
+			</form>
+			<span class="register-link" onclick="openModal('registerModal')">회원가입
+				하기</span>
+		</div>
+	</div>
+	
+	<!-- 회원가입 모달 -->
+	<div id="registerModal" class="modal">
+		<div class="modal-content">
+			<button class="close-btn" onclick="closeModal('registerModal')">X</button>
+			<form action="JoinController" method="post">
+				<h2>Travel Mate 회원가입</h2>
+				<input type="text" name="id" placeholder="아이디를 입력해주세요."> <input
+					type="password" name="pw" placeholder="비밀번호를 입력해주세요."> <input
+					type="text" name="name" placeholder="이름을 입력해주세요."> <input
+					type="text" name="nick" placeholder="닉네임을 입력해주세요.">
+				<div class="gender-check">
+					<span>성별 체크</span> <input type="radio" name="gender" value="M">
+					남 <input type="radio" name="gender" value="F"> 여
+				</div>
+				<div class="email-container">
+					<input type="text" name="email" placeholder="이메일을 입력해주세요.">
+				</div>
+				<button type="submit">회원가입</button>
+			</form>
+		</div>
+	</div>
     
     <nav>
         <ul>
@@ -32,6 +89,7 @@
     </nav>
 
     <main>
+	    
         <section class="announcement">
             <p>*최근공지사항*</p>
             <p>💢이거언제다하니...?</p>
@@ -58,9 +116,12 @@
                 </div>
             </div>
         </section>
-
+        
+	
         <section class="recent-posts">
             <h2>여행 게시글</h2>
+	    	<input type="text" class="search" placeholder="search"><button class="glass">🔍</button>
+
             <table>
                 <thead>
                     <tr>
@@ -90,16 +151,23 @@
         </section>
     </main>
 
-    <footer>
-        <input type="text" placeholder="search">
-        <button>🔍</button>
-    </footer>
-
-    <script src="assets/js/reviewListScript.js" defer></script>
+    
+    <script src="assets/js/header.js"></script>
     <script>
 	    function needLogin() {
 	    	alert("로그인이 필요합니다!");
 	    }
     </script>
+    <script>
+	function openCheckList() {
+		// URL, 창 이름, 창 옵션 설정
+		const url = "checkList.jsp";
+		const name = "_blank"; // _blank는 새 창을 의미
+		const options = "width=800,height=600,top=100,left=200";
+	
+		// 새 창 열기
+		window.open(url, name, options);
+	}
+</script>
 </body>
 </html>

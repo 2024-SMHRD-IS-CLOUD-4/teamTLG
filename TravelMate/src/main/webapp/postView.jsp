@@ -17,7 +17,6 @@
     <style>
 		.BoardComment-input {
 			width: 100%;
-			height: 100px;
 			padding: 10px;
 			border: 1px solid #ddd;
 			border-radius: 4px;
@@ -29,19 +28,25 @@
 			margin: 0 auto;
 			text-align: center;
 			border-collapse: collapse;
-			width: 80%;
+			width: 100%;
 		}
 		
 		/* 테이블과 셀 테두리 스타일 */
 		table, th, td {
-			border: 1px solid #ddd;
 			padding: 8px;
+		}
+		
+		td.title{
+			font-size: 2rem;
+			font-weight: bold;
+			margin: 0;
+			/* display: flex;
+			margin-left: auto; */
 		}
 		
 		/* 헤더 스타일 */
 		th {
-			background-color: #f2f2f2;
-			font-weight: bold;
+			background-color: #f2f2f2;	
 		}
     </style>
 </head>
@@ -63,14 +68,13 @@
     <!-- 메인 컨텐츠 -->
     <main class="container">
         <table class="table table-bordered">
+        	<%-- <tr>
+    			<td class="uploader"><%=member.getNick() %></td>
+    		</tr> --%>
     		<tr>
-    			<td>[번호]</td><td><%=board.getC_idx() %></td>
+    			<td class="title"><%=board.getC_title() %></td>
     		</tr>
     		<tr>
-    			<td>[제목]</td><td><%=board.getC_title() %></td>
-    		</tr>
-    		<tr>
-    			<td>[내용]</td>
     			<td><img src="upload/<%=board.getC_file() %>"><div><%=board.getC_content() %></div></td>
     		</tr>		
     	</table>
@@ -97,9 +101,9 @@
                 	</tr>
 		            <%for(int i = 0; i < commentList.size(); i++) {%>
 		            <tr>
-		            	<td><%=member.getId() %></td>
-		            	<td><%=commentList.get(i).getCmt_content() %></td>
-		            	<td><%=commentList.get(i).getCreated_at() %></td>
+				      	<td><%=member.getNick() %></td>
+				      	<td><%=commentList.get(i).getCmt_content() %></td>
+				      	<td><%=commentList.get(i).getCreated_at() %></td>
 		            <%} %>
 		            </tr>
             	</table>

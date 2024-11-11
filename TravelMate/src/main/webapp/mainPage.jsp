@@ -18,18 +18,18 @@ TravelPlan plan = (TravelPlan) session.getAttribute("plan");
 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 TravelPlanDAO tpDao = new TravelPlanDAO();
 %>
+
+
+
 <body>
 
-	<div class="page-wrapper">
-	<main class="content-wrapper">
+<!-- 	<div class="page-wrapper">
+	<main class="content-wrapper"> -->
 	<%@ include file="header.jsp"%>
 
 
 		<div class="content">
-			<!-- <a href="#" class="content-card fade-in-up"
-				style="background-image: url('img/tokyoView.png');">
-				<p class="card-text">도쿄 여행 꿀팁</p>
-			</a> --> <a href="#" class="content-card fade-in-up"
+			<a href="#" class="content-card fade-in-up"
 				style="background-image: url('img/course.jpg');">
 				<p class="card-text">추천 여행코스</p>
 			</a> <a href="reviewList.jsp" class="content-card fade-in-up"
