@@ -53,9 +53,9 @@ main {
     cursor: pointer; /* 마우스 커서 포인터 */
     transition: all 0.3s ease; /* 부드러운 전환 효과 */
     
-    position: fixed;
-    right: 17.2%;
-    bottom: 32.6%;
+    position: relative;
+    left: 25.25%;
+    bottom: 83.5px;
 }
 
 /* 마우스 올렸을 때 역동적인 효과 */
