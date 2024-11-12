@@ -246,7 +246,7 @@ function addCard(col_idx, card_idx = null, card_title = "", card_order = null) {
         .attr('contenteditable', 'true'); // 제목만 수정 가능하게 함
 
     // 삭제 버튼 추가 (수정 불가능하도록)
-    const deleteButton = $('<button>').addClass('delete-card-button').text('Delete')
+    const deleteButton = $('<button>').addClass('delete-card-button').text('X')
         .attr('contenteditable', 'false'); // 버튼은 수정 불가능하게 함
 
     deleteButton.on('click', function(event) {
