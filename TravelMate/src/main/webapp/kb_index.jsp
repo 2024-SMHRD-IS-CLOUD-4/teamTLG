@@ -17,13 +17,13 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
-
 <%
-   TravelPlan plan = (TravelPlan) session.getAttribute("plan");
+TravelPlan plan = (TravelPlan) session.getAttribute("plan");
 %>
-
 <body>
-   <%@ include file="header.jsp"%>
+
+	<%@ include file="header.jsp"%>
+
 	<div class="kanban-container">
 		<div class="kanban-board" id="kanban-board">
 			<!-- JavaScript에서 컬럼이 생성됩니다. -->
@@ -42,7 +42,6 @@
 		<!-- 댓글이 표시될 위치 -->
 		<div id="pagination" class="pagination"></div>
 	</div>
-
 
 	<script type="text/javascript">
         const tr_idx = "<%=request.getParameter("tr_idx")%>";

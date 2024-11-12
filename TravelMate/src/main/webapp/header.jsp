@@ -23,10 +23,10 @@
             <%
             } else {
             %>
-            <span onclick="openModal('alarmModal')">🔔<span>알람</span></span>
+           <!--  <span onclick="openModal('alarmModal')">🔔<span>알람</span></span> -->
             <span>👤<a href="myPageIndex.jsp"><span>my page</span></a></span>
             <span><a id="logout" href="LogoutController">로그아웃</a></span>
-            <span onclick="openCheckList()">나만의 여행가방</span>
+            <span onclick="openCheckList()">여행가방</span>
             <%
             }
             %>
