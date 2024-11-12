@@ -97,11 +97,12 @@ public class KanbanDAO {
 		}
 	}
 
-	public void deleteCard(int card_idx) {
+	public int deleteCard(int card_idx) {
 		SqlSession session = factory.openSession(false);
 		try {
-			session.delete("KanbanMapper.deleteCard", card_idx);
+			int result = session.delete("KanbanMapper.deleteCard", card_idx);
 			session.commit();
+			return result;
 		} catch (Exception e) {
 			session.rollback();
 			throw e;
@@ -109,65 +110,71 @@ public class KanbanDAO {
 			session.close();
 		}
 	}
-	
+
 	public int updateCardTitle(KanbanCard card) {
-	    SqlSession session = factory.openSession(false); // 자동 커밋 해제
-	    try {
-	        int result = session.update("KanbanMapper.updateCardTitle", card);
-	        session.commit(); // 성공 시 커밋
-	        return result;
-	    } catch (Exception e) {
-	        session.rollback(); // 오류 발생 시 롤백
-	        throw e; // 예외를 다시 던져서 호출한 곳에서 처리할 수 있게 함
-	    } finally {
-	        session.close(); // 세션 닫기
-	    }
+		SqlSession session = factory.openSession(false); // 자동 커밋 해제
+		try {
+			int result = session.update("KanbanMapper.updateCardTitle", card);
+			session.commit(); // 성공 시 커밋
+			return result;
+		} catch (Exception e) {
+			session.rollback(); // 오류 발생 시 롤백
+			throw e; // 예외를 다시 던져서 호출한 곳에서 처리할 수 있게 함
+		} finally {
+			session.close(); // 세션 닫기
+		}
 	}
 
 	public int updateColumnTitle(KanbanColumn column) {
-	    SqlSession session = factory.openSession(false); // 자동 커밋 해제
-	    try {
-	        int result = session.update("KanbanMapper.updateColumnTitle", column);
-	        session.commit(); // 성공 시 커밋
-	        return result;
-	    } catch (Exception e) {
-	        session.rollback(); // 오류 발생 시 롤백
-	        throw e; // 예외를 다시 던져서 호출한 곳에서 처리할 수 있게 함
-	    } finally {
-	        session.close(); // 세션 닫기
-	    }
+		SqlSession session = factory.openSession(false); // 자동 커밋 해제
+		try {
+			int result = session.update("KanbanMapper.updateColumnTitle", column);
+			session.commit(); // 성공 시 커밋
+			return result;
+		} catch (Exception e) {
+			session.rollback(); // 오류 발생 시 롤백
+			throw e; // 예외를 다시 던져서 호출한 곳에서 처리할 수 있게 함
+		} finally {
+			session.close(); // 세션 닫기
+		}
 	}
 
-	public void deleteCardsByColumn(int col_idx) {
-	    SqlSession session = factory.openSession();
-	    try {
-	        session.delete("deleteCardsByColumn", col_idx);
-	        session.commit();
-	    } finally {
-	        session.close();
-	    }
-	}
+	/*
+	 * public void deleteColumnAndCards(int col_idx) { SqlSession session =
+	 * factory.openSession(false); // 자동 커밋 해제 try { // 해당 컬럼에 속한 모든 카드 삭제
+	 * session.delete("KanbanMapper.deleteCardsByColumn", col_idx); // 컬럼 삭제
+	 * session.delete("KanbanMapper.deleteColumn", col_idx); // 성공 시 커밋
+	 * session.commit(); } catch (Exception e) { // 오류 발생 시 롤백 session.rollback();
+	 * throw e; } finally { // 세션 닫기 session.close(); } }
+	 */
 
-	public int deleteColumn(int col_idx) {
-	    SqlSession session = factory.openSession();
-	    try {
-	        int result = session.delete("deleteColumn", col_idx);
-	        session.commit();
-	        return result;
-	    } finally {
-	        session.close();
-	    }
-	}
-
-	public KanbanCard getKanbanDataByCardId(int cardId) {
+	// 특정 카드 정보 가져오기
+	public KanbanCard getCardById(int cardId) {
 		SqlSession session = factory.openSession();
 		try {
-			
-			return session.selectOne("KanbanMapper.getCardById",cardId);
+			return session.selectOne("KanbanMapper.getCardById", cardId);
 		} finally {
 			session.close();
 		}
 	}
 
+	// 카드 삭제 (특정 컬럼의 모든 카드 삭제)
+	public void deleteCardsByColumnId(int col_idx) {
+		SqlSession session = factory.openSession(true);
+		try {
+			session.delete("KanbanMapper.deleteCardsByColumnId", col_idx);
+		} finally {
+			session.close();
+		}
+	}
 
+	// 컬럼 삭제
+	public void deleteColumn(int col_idx) {
+		SqlSession session = factory.openSession(true);
+		try {
+			session.delete("KanbanMapper.deleteColumn", col_idx);
+		} finally {
+			session.close();
+		}
+	}
 }

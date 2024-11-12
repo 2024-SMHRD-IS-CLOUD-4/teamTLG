@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+    color: #4a4a4a;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+a { text-decoration:none }
+
+.header-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: white;
+    max-width: 1200px; /* 최대 넓이 제한 */
+    margin: 0 auto;    /* 화면 가운데 정렬 */
+}
+
+.header-title {
+    font-size: 4rem;
+    color: #b08584;
+    margin: 0;
+    cursor: pointer;
+}
+
+.header-icons {
+    position: absolute;
+    right: 20px;  /* 오른쪽에 고정 위치 */
+    display: flex;
+    gap: 15px; /* 아이콘 간의 간격 */
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.header-icons span {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header-icons span span {
+    margin-left: 5px;
+    color: #333;
+}
+
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+form {
+    width: 64%;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+}
+
+input[type="text"],
+input[type="date"],
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 10px 15px; /* 좌우에 패딩 추가 */
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box; /* 패딩이 요소의 너비에 포함되도록 설정 */
+}
+
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #b08584;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #a0746c;
+}

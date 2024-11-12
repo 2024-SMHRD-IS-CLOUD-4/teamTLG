@@ -1,0 +1,413 @@
+/* Body 스타일 */
+body {
+    background-color: white;
+    color: #333;
+}
+
+
+/* Main Content 스타일 */
+main {
+    padding: 20px;
+}
+
+/* 전체 페이지 배경 설정 */
+.page-wrapper {
+    background-color: white; /* 양쪽 배경색 */
+    display: flex;
+    justify-content: center;
+    padding: 20px ; /* 위아래 여백 추가 */
+}
+
+/* 가운데 컨텐츠 영역 스타일 */
+.content-wrapper {
+    background-color: white; 
+    width: 65%; /* 화면에서 가운데 영역 너비 (필요에 따라 조정) */
+    padding: 20px; /* 안쪽 여백 */
+    border-radius: 10px; /* 둥근 모서리 */
+}
+
+
+/* 초기 상태 - 이미지가 아래에 있고 투명 */
+.fade-in-up {
+    opacity: 0 ;
+    transform: translateY(20px); /* 아래에서 시작 */
+    transition: opacity 0.6s ease, transform 0.6s ease; /* 전환 시간 */
+}
+
+/* 화면에 보이기 시작했을 때 - 정상 위치로 이동하고 불투명하게 */
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0); /* 원래 위치 */
+}
+
+/* 버튼 스타일 */
+.plan-button {
+    background-color: #D1FAFE; 
+    color: #333; /* 글자색 */
+    padding: 20px 100px; /* 안쪽 여백 */
+    border: 2px solid #b08584; /* 두께, 스타일, 색상 */
+    border-radius: 10px; /* 테두리의 모서리를 둥글게 (옵션) */
+    font-size: 16px; /* 글자 크기 */
+    font-weight: bold; /* 글자 굵기 */
+    text-align: center;
+    cursor: pointer; /* 마우스 커서 포인터 */
+    transition: all 0.3s ease; /* 부드러운 전환 효과 */
+    
+    position: relative;
+    left: 24.73%;
+    bottom: 83.5px;
+}
+
+/* 마우스 올렸을 때 역동적인 효과 */
+.plan-button:hover {
+    background-color: #FBD3FE; /* 마우스를 올리면 색상 변경 */
+    transform: scale(1.03); /* 크기가 커지는 효과 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+}
+
+/* 클릭했을 때 더 깊은 효과 */
+.plan-button:active {
+    transform: scale(0.98); /* 클릭 시 크기 축소 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 변화 */
+}
+
+
+.content {
+    display: flex;
+    gap: 1.5%; /* 카드 사이의 간격 */
+    margin-top: 100px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.content-card {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 15vw;
+    height: 22vw;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    text-decoration: none; /* 언더라인 제거 */
+    color: inherit; /* 텍스트 색상 상속 */
+    transition: transform 1s ease; /* 이미지 크기 전환 효과 추가 */
+}
+
+.content-card2 {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 15vw;
+    height: 22vw;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    text-decoration: none; /* 언더라인 제거 */
+    color: inherit; /* 텍스트 색상 상속 */
+    border: 2px solid #b08584; /* 두께, 스타일, 색상 */
+    border-radius: 10px; /* 테두리의 모서리를 둥글게 (옵션) */
+    transition: transform 1s ease; /* 이미지 크기 전환 효과 추가 */
+    transition-delay: 0.6s;
+}
+
+.content-card3 {
+	background-color: beige !important;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 350px;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    align-items: flex-start;
+    justify-content: center;
+    text-decoration: none; /* 언더라인 제거 */
+    color: inherit; /* 텍스트 색상 상속 */
+    border: 2px solid #b08584; /* 두께, 스타일, 색상 */
+    border-radius: 10px; /* 테두리의 모서리를 둥글게 (옵션) */
+    transition: transform 1s ease; /* 이미지 크기 전환 효과 추가 */
+    transition-delay: 0s;
+}
+
+#travel-plan-list {
+    list-style: none; /* 기본 리스트 스타일 제거 */
+    padding: 0; /* 여백 제거 */
+    margin-top: 30px; /* 리스트와 제목 사이 여백 */
+    max-height: 270px; /* 리스트의 최대 높이 설정 */
+/*     border: 1px solid #b08584; 두께, 스타일, 색상 */
+    border-radius: 10px; /* 테두리의 모서리를 둥글게 (옵션) */
+    overflow-y: auto; /* 세로 스크롤 추가 */
+    display: flex; /* 플렉스박스 레이아웃 */
+    flex-direction: column; /* 세로 방향으로 정렬 */
+}
+
+#travel-plan-list li {
+/*     margin-bottom: 10px; 각 리스트 항목 사이 간격 */
+    padding: 12px;
+/*     background-color: #D1FAFE; 각 항목의 배경 */
+    border: 1px solid #ddd; /* 각 항목의 테두리 */
+    border-radius: 5px; /* 항목의 모서리를 둥글게 */
+}
+
+#travel-plan-list li a {
+    text-decoration: none;
+    color: #333; /* 링크 색상 */
+    display: block; /* 전체 영역 클릭 가능 */
+}
+
+/* 마우스를 올렸을 때 이미지 확대 */
+.content-card:hover {
+    transform: scale(1.03); /* 1.1배 확대 */
+}
+
+.content-card:active {
+    transform: scale(0.98); /* 클릭 시 크기 축소 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 변화 */
+}
+
+.content-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%; /* Adjust this to control the gradient height */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    border-radius: 8px; /* Match card border-radius */
+    z-index: 1;
+}
+
+.card-text {
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    width: 100%; /* 텍스트가 카드 너비에 맞춰 중앙 정렬되도록 */
+    text-align: left;
+    font-size: 1.4vw; /* 화면 크기에 따라 반응형으로 조정 */
+    position: relative;
+    z-index: 2; /* Ensures text is above the gradient overlay */
+}
+
+.card-text2 {
+    color: black;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 14px;
+    width: 100%; /* 텍스트가 카드 너비에 맞춰 중앙 정렬되도록 */
+    text-align: center;
+    font-size: 1.4vw; /* 화면 크기에 따라 반응형으로 조정 */
+    position: relative;
+    z-index: 2; /* Ensures text is above the gradient overlay */
+}
+
+.card-text3 {
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 14px;
+    width: 100%; /* 텍스트가 카드 너비에 맞춰 중앙 정렬되도록 */
+    text-align: center;
+    font-size: 1.4vw; /* 화면 크기에 따라 반응형으로 조정 */
+    position: relative;
+    z-index: 2; /* Ensures text is above the gradient overlay */
+}
+
+.lists {
+    display: flex;
+    gap: 15px;
+}
+
+.list-1 {
+    background-color: #f5f5f5;
+    width: 33%;
+    height: 60px;
+    border-radius: 4px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.list-2 {
+    background-color: #f5f5f5;
+    width: 33%;
+    height: 60px;
+    border-radius: 4px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.modal-content {
+    max-width: 300px; /* 모달 창의 최대 너비 설정 */
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.modal-content h2 {
+    font-size: 20px;
+    color: #d36d6d;
+    margin-bottom: 20px;
+}
+
+.modal-content input[type="text"],
+        .modal-content input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .modal-content .gender-check {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            margin: 8px 0;
+        }
+        .modal-content .email-container {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .modal-content select {
+            flex: 0.5; /* 셀렉트 박스의 크기 조정 */
+            padding: 8px;
+        }
+        .modal-content .register-btn {
+            padding: 10px;
+            width: 100%;
+            background-color: #dcdcdc;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .modal-content .google-btn {
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+            display: block;
+        }
+        .modal-content .register-link {
+            margin-top: 5px;
+            cursor: pointer;
+            text-decoration: underline;
+            color: #666;
+        }
+        .modal-content .register-link:hover {
+            cursor: pointer; /* 커서 변경 */
+            color: #333; /* 색상 변경으로 시각적 효과 추가 */
+        }
+        .close-btn {
+            background-color: #ccc;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+        
+#planFormModal {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 10;
+}
+
+#planFormModal .modal-content {
+	position: absolute;
+	top: 20%;
+	left: 40%;
+   	max-width: 400px; 
+    width: 90%; 
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 여행 계획 모달 내부의 입력 요소 스타일 */
+#planFormModal input[type="text"],
+#planFormModal input[type="date"],
+#planFormModal textarea {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#planFormModal button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 메시지 스타일 */
+#toastMessage {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+/* 메시지가 보일 때의 스타일 */
+#toastMessage.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+

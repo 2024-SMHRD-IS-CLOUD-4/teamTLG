@@ -1,17 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ScheduleMapper">
-    <!-- 스케줄 입력 -->
-    <insert id="insertSchedule" parameterType="com.tlg.model.Schedule">
-        INSERT INTO TRAVEL_SCHEDULE_INFO (sche_idx, tr_idx, sche_type, sche_dt, id, vote_result)
-        VALUES (travel_schedule_info_seq.nexval, #{tr_idx}, #{sche_type}, #{sche_dt}, #{id}, #{vote_result})
-    </insert>
 
-    <!-- 스케줄 찾기 -->
-    <select id="selectSchedule" parameterType="String" resultType="com.tlg.model.Schedule">
-        SELECT * FROM TRAVEL_SCHEDULE_INFO WHERE tr_idx = #{tr_idx}
-    </select>
+	<insert id="insertSchedule" parameterType="com.tlg.model.Schedule">
+	    INSERT INTO TRAVEL_SCHEDULE_INFO (SCHE_IDX, SCHE_TYPE, SCHE_TM, SCHE_PLACE, SCHE_DESC, CARD_IDX, COL_IDX)
+	    VALUES (TRAVEL_SCHEDULE_INFO_SEQ.nextval, #{sche_type}, #{sche_tm}, #{sche_place}, #{sche_desc}, #{card_idx}, #{col_idx})
+	</insert>
+
+
+
+		<!-- KanbanCard 테이블에서 card_title만 조회 -->
+	<select id="getCardTitle" parameterType="int" resultType="string">
+	    SELECT card_title FROM kanban_card WHERE card_idx = #{cardIdx}
+	</select>
+	
+	<!-- Schedule 테이블에서 추가 정보 조회 -->
+	<select id="getScheduleDetails" parameterType="int" resultType="com.tlg.model.Schedule">
+	    SELECT * FROM travel_schedule_info WHERE card_idx = #{cardIdx}
+	</select>
+	
+	  <!-- column_id로 스케줄 삭제 -->
+    <delete id="deleteSchedulesByColumnId" parameterType="int">
+        DELETE FROM TRAVEL_SCHEDULE_INFO WHERE COL_IDX = #{columnId}
+    </delete>
+
+    <!-- card_id로 스케줄 삭제 -->
+    <delete id="deleteSchedulesByCardId" parameterType="int">
+        DELETE FROM TRAVEL_SCHEDULE_INFO WHERE CARD_IDX = #{cardId}
+    </delete>
     
-    
-    
+       <update id="updateSchedule" parameterType="com.tlg.model.Schedule">
+        UPDATE TRAVEL_SCHEDULE_INFO
+        SET
+            SCHE_TYPE = #{sche_type},
+            SCHE_PLACE = #{sche_place},
+            SCHE_DESC = #{sche_desc},
+            SCHE_TM = #{sche_tm}
+        WHERE
+            SCHE_IDX = #{sche_idx}
+   	 </update>
+   	 
+   	 <insert id="createSchedule" parameterType="com.tlg.model.Schedule">
+	    INSERT INTO TRAVEL_SCHEDULE_INFO (SCHE_TYPE, SCHE_PLACE, SCHE_DESC, SCHE_TM, CARD_IDX)
+	    VALUES (#{sche_type}, #{sche_place}, #{sche_desc}, #{sche_tm}, #{card_idx})
+	</insert>
+   	 
+
+
 </mapper>
