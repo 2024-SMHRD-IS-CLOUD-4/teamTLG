@@ -10,12 +10,42 @@
    - 사용자들이 자유롭게 여행기록을 남기고 정보를 공유하도록 커뮤니티게시판 제공
    
 ## 프로젝트기간
+- 10/11 ~ 11/12
+
 ## 주요기능
+- ajax의 라이브러리를 이용한 칸반보드 구현
+- ocr기술을 통한 항공권 데이터 저장
+
 ## 기술스택
+ - back-end : java, python(flask), mybatis, jsp, servlet
+ - front-end : javascript, ajax, html, css
+ - IDE : eclipse
+ - DataBase : Oracle
+ - Library : jquery
+ - Collaboration : Github
+  
 ## 시스템 아키텍처
+![image](https://github.com/user-attachments/assets/06c86153-2545-49cb-81db-adf9a4edb877)
+
 ## 유스케이스
+유스케이스 추가해주세요><
 ## 서비스 흐름도
+서비스흐름도 추가해주세요><
 ## ER 다이어그램
+ER다이어그램 추가해주세요><
 ## 화면구성
+1. 여행계획보드
+![image](https://github.com/user-attachments/assets/7d0be192-da44-461a-8444-5cf10cbd09de)
+
+2. 상세계획페이지
+![image](https://github.com/user-attachments/assets/607e7dca-af08-4387-8562-9c305e9de3dc)
+
+3. 여행커뮤니티
+![image](https://github.com/user-attachments/assets/b8d35aa2-b1b6-4ffe-bc7b-835342bb835c)
+
 ## 팀원역할
+![image](https://github.com/user-attachments/assets/36dd1c9a-d7d2-4184-9f96-78565076f6c9)
+
 ## 트러블슈팅
+![image](https://github.com/user-attachments/assets/91c2e891-7c00-4bfa-9904-7d12df480841)
+
