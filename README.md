@@ -28,7 +28,10 @@
 ![image](https://github.com/user-attachments/assets/06c86153-2545-49cb-81db-adf9a4edb877)
 
 ## 유스케이스
-유스케이스 추가해주세요><
+![image](https://github.com/user-attachments/assets/783b8aa3-a3cd-47fc-98cb-dec7e8e6016d)
+![image](https://github.com/user-attachments/assets/f04d7f87-abdb-43fd-a852-871a25f7ffd5)
+![image](https://github.com/user-attachments/assets/33ad538d-b5ec-4123-aff0-15557126d9b1)
+
 ## 서비스 흐름도
 서비스흐름도 추가해주세요><
 ## ER 다이어그램
