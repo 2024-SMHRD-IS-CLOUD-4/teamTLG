@@ -32,7 +32,7 @@
 ## 서비스 흐름도
 서비스흐름도 추가해주세요><
 ## ER 다이어그램
-ER다이어그램 추가해주세요><
+![image](https://github.com/user-attachments/assets/e4a76818-49c4-4684-a35f-156cfe639710)
 ## 화면구성
 1. 여행계획보드
 ![image](https://github.com/user-attachments/assets/7d0be192-da44-461a-8444-5cf10cbd09de)
