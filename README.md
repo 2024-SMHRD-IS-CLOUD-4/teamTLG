@@ -37,14 +37,17 @@
 ## ER 다이어그램
 ![image](https://github.com/user-attachments/assets/e4a76818-49c4-4684-a35f-156cfe639710)
 ## 화면구성
-1. 여행계획보드
+1. 메인페이지
+![image](https://github.com/user-attachments/assets/feaa4816-bd7b-434d-b723-f5776cf05f3f)
+
+2. 여행계획보드
 ![image](https://github.com/user-attachments/assets/7d0be192-da44-461a-8444-5cf10cbd09de)
 
-2. 상세계획페이지
+3. 상세계획페이지
    
 ![image](https://github.com/user-attachments/assets/607e7dca-af08-4387-8562-9c305e9de3dc)
 
-3. 여행커뮤니티
+4. 여행커뮤니티
 ![image](https://github.com/user-attachments/assets/b8d35aa2-b1b6-4ffe-bc7b-835342bb835c)
 
 ## 팀원역할
