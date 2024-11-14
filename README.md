@@ -41,6 +41,7 @@
 ![image](https://github.com/user-attachments/assets/7d0be192-da44-461a-8444-5cf10cbd09de)
 
 2. 상세계획페이지
+   
 ![image](https://github.com/user-attachments/assets/607e7dca-af08-4387-8562-9c305e9de3dc)
 
 3. 여행커뮤니티
