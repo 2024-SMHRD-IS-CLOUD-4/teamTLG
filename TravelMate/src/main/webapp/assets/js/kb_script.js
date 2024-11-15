@@ -246,9 +246,11 @@ function addCard(col_idx, card_idx = null, card_title = "", card_order = null) {
         .attr('contenteditable', 'true'); // 제목만 수정 가능하게 함
 
     // 삭제 버튼 추가 (수정 불가능하도록)
-    const deleteButton = $('<button>').addClass('delete-card-button').text('X')
-        .attr('contenteditable', 'false'); // 버튼은 수정 불가능하게 함
-
+	const deleteButton = $('<button>')
+	    .addClass('delete-card-button')
+	    .html('<img src="img/xicon.png" alt="X" class = "delete-icon"/>') 
+	    .attr('contenteditable', 'false'); 
+		
     deleteButton.on('click', function(event) {
         event.stopPropagation(); // 카드 클릭 이벤트와 충돌하지 않도록 클릭 이벤트 중지
         const confirmed = confirm('이 카드를 삭제하시겠습니까?');

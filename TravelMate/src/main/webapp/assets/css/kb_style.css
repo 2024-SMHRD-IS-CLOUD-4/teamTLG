@@ -33,6 +33,11 @@ body {
     height: 100%
 }
 
+.delete-icon{
+	width: 20px;
+	height: 20px;
+}
+
 .kanban-column h2 {
     text-align: center;
     color: #333;

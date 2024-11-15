@@ -46,6 +46,8 @@
 		<!-- 시간 입력 -->
 		<label for="time">시간:</label> <input type="time" id="time"
 			value="<%=request.getAttribute("sche_tm") != null ? request.getAttribute("sche_tm").toString().substring(11, 16) : ""%>">
+		
+		<a onclick="openDetailPage()">항공권 정보 입력</a>
 
 		<!-- 장소 입력 -->
 		<label for="location">장소:</label> <input type="text" id="location"
@@ -65,10 +67,10 @@
 			<ol id="vote-options">
 				<!-- 사용자 정의 투표 항목이 추가될 자리 -->
 			</ol>
-			<button onclick="addVoteOption()">항목 추가</button>
-			<button onclick="startVoting()">투표 시작</button>
-			<button id="complete-vote-btn" style="display: none;"
-				onclick="completeVoting()">투표 완료</button>
+			 <button id="complete-vote-btn" style="display: none;" onclick="completeVoting()">투표 완료</button>
+            <button id="cancel-vote-btn" style="display: none;" onclick="cancelVoting()">투표 취소</button>
+            <button onclick="addVoteOption()">항목 추가</button>
+            <button onclick="startVoting()">투표 시작</button>
 		</div>
 	</div>
 	<script>
