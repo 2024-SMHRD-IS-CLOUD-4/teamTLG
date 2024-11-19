@@ -33,7 +33,18 @@
 ![image](https://github.com/user-attachments/assets/33ad538d-b5ec-4123-aff0-15557126d9b1)
 
 ## 서비스 흐름도
-서비스흐름도 추가해주세요><
+![image](https://github.com/user-attachments/assets/461543c6-a9aa-489f-afbf-36a27af6a5f3)
+![image](https://github.com/user-attachments/assets/25da63e8-ae8c-47ac-a0b0-3b62cad7b522)
+![image](https://github.com/user-attachments/assets/6fab2496-550a-4f75-b105-341b9d02852c)
+![image](https://github.com/user-attachments/assets/9bb3b53e-4e57-4af0-bb4e-ce4454972da6)
+![image](https://github.com/user-attachments/assets/4f23a130-472a-49e9-a47e-74412c446458)
+![image](https://github.com/user-attachments/assets/1e6cce51-1d01-439f-a811-57bccc772406)
+![image](https://github.com/user-attachments/assets/fc9befe6-3d96-41e3-9492-1cacf225666b)
+![image](https://github.com/user-attachments/assets/de053c44-eafc-4ad9-b6d4-b8da38bae9d7)
+![image](https://github.com/user-attachments/assets/46f30226-611d-410e-86af-17e78884d3e7)
+![image](https://github.com/user-attachments/assets/80f59ef2-e5a0-4137-a7fd-e29f4fe80857)
+![image](https://github.com/user-attachments/assets/18496e18-a4be-4fd2-bea0-9bfcfed80975)
+
 ## ER 다이어그램
 ![image](https://github.com/user-attachments/assets/e4a76818-49c4-4684-a35f-156cfe639710)
 ## 화면구성
