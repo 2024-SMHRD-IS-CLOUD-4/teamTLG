@@ -28,9 +28,9 @@
 ![image](https://github.com/user-attachments/assets/06c86153-2545-49cb-81db-adf9a4edb877)
 
 ## 유스케이스
-![image](https://github.com/user-attachments/assets/783b8aa3-a3cd-47fc-98cb-dec7e8e6016d)
-![image](https://github.com/user-attachments/assets/f04d7f87-abdb-43fd-a852-871a25f7ffd5)
-![image](https://github.com/user-attachments/assets/33ad538d-b5ec-4123-aff0-15557126d9b1)
+![image](https://github.com/user-attachments/assets/b735ffe5-c8e9-472c-9387-40cea42efbbf)
+![image](https://github.com/user-attachments/assets/910a4870-a94f-4843-9529-d1029ae1ad60)
+![image](https://github.com/user-attachments/assets/548cb7ae-0c59-4005-b19e-93ddfd75e4f4)
 
 ## 서비스 흐름도
 ![image](https://github.com/user-attachments/assets/461543c6-a9aa-489f-afbf-36a27af6a5f3)
@@ -38,12 +38,12 @@
 ![image](https://github.com/user-attachments/assets/6fab2496-550a-4f75-b105-341b9d02852c)
 ![image](https://github.com/user-attachments/assets/9bb3b53e-4e57-4af0-bb4e-ce4454972da6)
 ![image](https://github.com/user-attachments/assets/4f23a130-472a-49e9-a47e-74412c446458)
-![image](https://github.com/user-attachments/assets/1e6cce51-1d01-439f-a811-57bccc772406)
-![image](https://github.com/user-attachments/assets/fc9befe6-3d96-41e3-9492-1cacf225666b)
-![image](https://github.com/user-attachments/assets/de053c44-eafc-4ad9-b6d4-b8da38bae9d7)
-![image](https://github.com/user-attachments/assets/46f30226-611d-410e-86af-17e78884d3e7)
+![image](https://github.com/user-attachments/assets/49f3b692-4baf-4fc8-b13b-c477bcd971f0)
+![image](https://github.com/user-attachments/assets/a3f551bd-3b06-42e3-8f5f-9606cf49ef64)
+![image](https://github.com/user-attachments/assets/6a9192ac-e681-4175-9986-eb4907319f52)
+![image](https://github.com/user-attachments/assets/04786c51-8ecb-4cbe-9a1f-c66d0d5d17fe)
 ![image](https://github.com/user-attachments/assets/80f59ef2-e5a0-4137-a7fd-e29f4fe80857)
-![image](https://github.com/user-attachments/assets/18496e18-a4be-4fd2-bea0-9bfcfed80975)
+![image](https://github.com/user-attachments/assets/ff402c56-72de-4103-b4d7-734188c47873)
 
 ## ER 다이어그램
 ![image](https://github.com/user-attachments/assets/e4a76818-49c4-4684-a35f-156cfe639710)
